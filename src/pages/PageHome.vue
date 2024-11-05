@@ -11,6 +11,7 @@ export default {
         <p>Qua inseriremo probabilmente delle cose</p>
     </div>
    </div>
+
 </template>
 
 <style lang="scss" scoped>
