@@ -5,10 +5,12 @@ export default {
 </script>
 
 <template>
-    <div>
+   <div class="container">
+    <div class="row">
         <h1>Questa è la nostra Home</h1>
         <p>Qua inseriremo probabilmente delle cose</p>
     </div>
+   </div>
 </template>
 
 <style lang="scss" scoped>
