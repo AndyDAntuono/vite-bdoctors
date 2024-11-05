@@ -7,7 +7,7 @@ export default {
 <template>
   <div>
     <h1>Su di noi</h1>
-    <p>Questa è la pagina "Su di noi", dove puoi saperne di più su di noi e sulla nostra missione.</p>
+    <p>Questa è la pagina "Su di noi", dove puoi saperne di più su di noi e sul nostro lavoro.</p>
   </div>
 </template>
 

@@ -5,9 +5,10 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h1>Ciao</h1>
-  </div>
+    <div>
+        <h1>Questa è la nostra Home</h1>
+        <p>Qua inseriremo probabilmente delle cose</p>
+    </div>
 </template>
 
 <style lang="scss" scoped>
