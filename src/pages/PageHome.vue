@@ -1,6 +1,24 @@
 <script>
+import { store } from '../store';
+import axios from 'axios';
+import DoctorCard from '../components/DoctorCard.vue';
 export default {
-  name: 'PageHome'
+  name: 'PageHome',
+  components: {
+    DoctorCard
+  },
+  data() {
+    return {
+      store,
+      doctors: {}
+    }
+  },
+  created(){
+    let url = `${store.url}${store.doctors}`
+    axios.get(url).then((res) => {
+      this.doctors = res.data.results
+    })
+  },
 };
 </script>
 
@@ -32,6 +50,11 @@ export default {
           </form>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="container my-5">
+    <div class="row gy-3">
+      <DoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor"/>
     </div>
   </div>
 </template>

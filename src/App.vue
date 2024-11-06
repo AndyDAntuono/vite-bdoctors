@@ -3,7 +3,6 @@ import Header from './components/AppHeader.vue';
 import Footer from './components/AppFooter.vue';
 import { store } from './store.js'; 
 
-import axios from 'axios';
 
 export default {
   components:{
