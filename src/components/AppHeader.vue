@@ -18,7 +18,7 @@ export default {
          
           <router-link to="/" class="d-flex align-items-center text-white text-decoration-none">
             <img src="../../public/logo.png" alt="Logo" class="logo me-2" />
-            <span>Bdoctors</span>
+            <span class="fw-bolder">Bdoctors</span>
           </router-link>
 
           <!-- Menu di navigazione -->
