@@ -66,8 +66,8 @@ export default {
 .home-container {
   background-image: url('../../public/bg-home.jpg');
   background-size: cover;
-  background-position: center;
-  height: 100vh;
+  background-position: top;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

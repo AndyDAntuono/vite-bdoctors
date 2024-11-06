@@ -14,3 +14,12 @@ $light-gray: #E8E8E8;
 $dark-grey: #6B6B6B;
 $pure-white: #FFFFFF;
 $soft-pink: #F7CAC9;
+
+
+body {
+    background-color: $light-gray;
+}
+
+header {
+    box-shadow: 0 3px 5px $dark-grey;
+}
