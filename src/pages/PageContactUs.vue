@@ -8,7 +8,7 @@ export default {
   <div class="container my-5">
     <div class="row">
       <div class="col-6">
-        <h2>Scrivici un Messaggio</h2>
+        <h3>Scrivici un Messaggio</h3>
         <p>Compila il modulo qui sotto e ti risponderemo il prima possibile.</p>
         <div class="bg-form rounded p-3">
           <form method="POST">
@@ -51,16 +51,16 @@ export default {
           </div>
           <div class="contact-item">
               <h3>Indirizzo</h3>
-              <p>Via Roma, 123<br>Città, CAP</p>
+              <p>Via Roma, 123<br>Roma, 00100</p>
           </div>
         </div>
         <section id="map-location">
-          <h2>Dove Trovarci</h2>
+          <h3>Dove Trovarci</h3>
           <p>Consulta la mappa per raggiungerci facilmente presso la nostra sede.</p>
           <!-- Mappa incorporata -->
           <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243645.9711975291!2d12.492231!3d41.902784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61044c1f9fd1%3A0x1f27b19d56dd23bb!2sRoma!5e0!3m2!1sit!2sit!4v1634236208423!5m2!1sit!2sit"
-              width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+              width="100%" height="275" style="border:0;" allowfullscreen="" loading="lazy">
           </iframe>
       </section>
       </div>
@@ -71,6 +71,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
+
+h3 {
+  color: #005792;
+}
 
 .bg-form {
   background-color: #76C7C0;
