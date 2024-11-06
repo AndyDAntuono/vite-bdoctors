@@ -1,12 +1,20 @@
 <script>
 import Header from './components/AppHeader.vue';
 import Footer from './components/AppFooter.vue';
+import { store } from './store.js'; 
 
+import axios from 'axios';
 
 export default {
-    components: {
+  components:{
     Header,
     Footer
+
+  },
+  data() {
+    return {
+      store
+    }
   }
 }
 </script>
@@ -14,7 +22,7 @@ export default {
 <template>
     <main class="h-100">
     <!-- componente Header -->
-        <Header />
+        <Header  :menu="store.menu" />
 
         <router-view></router-view>
     <!-- componente Footer -->
