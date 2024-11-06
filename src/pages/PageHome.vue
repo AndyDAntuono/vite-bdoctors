@@ -52,7 +52,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container my-5">
     <div class="row gy-3">
       <DoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor"/>
     </div>
