@@ -5,10 +5,6 @@ export const store = reactive({
 
     menu: [
         {
-            name: 'homepage',
-            label: 'Home'
-        },
-        {
             name: 'about',
             label: 'Su di noi'
         },
