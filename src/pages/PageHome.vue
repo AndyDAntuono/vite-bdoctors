@@ -1,6 +1,19 @@
 <script>
+import { store } from '../store';
+import axios from 'axios';
 export default {
-  name: 'PageHome'
+  name: 'PageHome',
+  data() {
+    return {
+      store
+    }
+  },
+  created(){
+    let url = `${store.url}${store.doctors}`
+    axios.get(url).then((res) => {
+      this.doctors = res.data.results
+    })
+  },
 };
 </script>
 
