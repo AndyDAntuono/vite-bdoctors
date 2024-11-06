@@ -1,11 +1,16 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import DoctorCard from '../components/DoctorCard.vue';
 export default {
   name: 'PageHome',
+  components: {
+    DoctorCard
+  },
   data() {
     return {
-      store
+      store,
+      doctors: {}
     }
   },
   created(){
@@ -45,6 +50,11 @@ export default {
           </form>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row gy-3">
+      <DoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor"/>
     </div>
   </div>
 </template>
