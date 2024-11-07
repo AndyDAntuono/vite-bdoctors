@@ -2,6 +2,11 @@
 export default {
     props: {
         doctor: Object
+    },
+    methods: {
+        trText(text) {
+            return text.substr(0, 50)+'...';
+        }
     }
 }
 </script>
@@ -17,7 +22,7 @@ export default {
                     <li class="card-text me-2 fw-bold list" v-for="field in doctor.fields">{{field.name}}</li>
                 </ul>
                 <span>{{doctor.address}} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})</span>
-                <p class="card-text">{{doctor.performance}}</p>
+                <p class="card-text">{{trText(doctor.performance)}}</p>
             </div>
         </div>
     </div>
