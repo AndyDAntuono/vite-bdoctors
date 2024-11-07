@@ -80,7 +80,8 @@ footer a:hover {
 }
 
 img {
-  width: 30%;
+  max-width: 100%;
+  height: auto;
 }
 
 i {
@@ -90,6 +91,30 @@ i {
 
 p {
   font-size: 14px;
+}
+
+@media (max-width: 1200px) {
+  img {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  img {
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 425px) {
+  img {
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 375px) {
+  img {
+    max-width: 80%;
+  }
 }
 
 </style>
