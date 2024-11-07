@@ -43,13 +43,13 @@ export default {
       </div>
     </div>
     <div class="row my-5">
-      <div class="col-12 col-md-12 col-lg-10">
+      <div class="col-12 order-2 col-md-12 order-md-2 col-lg-10 order-lg-1">
         <h2>Il Nostro Team</h2>
         <p>
           Il nostro team è composto da medici, esperti di tecnologia e assistenza clienti, tutti impegnati per offrire il meglio ai nostri pazienti. Con competenza e dedizione, siamo pronti ad assistervi in ogni fase del vostro percorso di cura.
         </p>
       </div>
-      <div class="col-12 col-md-12 col-lg-2 text-center">
+      <div class="col-12 order-1 col-md-12 order-md-1 col-lg-2 order-lg-2 text-center">
         <img src="../../public/team.png" alt="team.png">
       </div>
     </div>
@@ -93,13 +93,13 @@ h2 {
 
 @media (max-width: 425px) {
   img {
-    max-width: 65%;
+    max-width: 30%;
   }
 }
 
 @media (max-width: 375px) {
   img {
-    max-width: 80%;
+    max-width: 30%;
   }
 }
 

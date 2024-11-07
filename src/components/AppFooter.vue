@@ -107,7 +107,7 @@ p {
 
 @media (max-width: 425px) {
   img {
-    max-width: 65%;
+    max-width: 50%;
   }
 }
 
