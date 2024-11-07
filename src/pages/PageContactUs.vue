@@ -7,7 +7,7 @@ export default {
 <template>
   <div class="container my-5">
     <div class="row">
-      <div class="col-6">
+      <div class="col-12 col-md-12 col-lg-6 mb-4">
         <h3>Scrivici un Messaggio</h3>
         <p>Compila il modulo qui sotto e ti risponderemo il prima possibile.</p>
         <div class="bg-form rounded p-3">
@@ -30,7 +30,7 @@ export default {
             </div>
             <div>
               <label for="message">Messaggio:</label>
-              <textarea class="d-block rounded border-0" id="message" name="message" cols="50" rows="10" required></textarea>
+              <textarea class="d-block rounded border-0 w-100" id="message" name="message" rows="10" required></textarea>
             </div>
             <div>
               <button class="mt-3 rounded" type="submit">Invia Messaggio</button>
@@ -39,8 +39,8 @@ export default {
         </div>
       </div>
 
-      <div class="col-6">
-        <div class="contact-details">
+      <div class="col-12 col-md-12 col-lg-6">
+        <div class="contact-details mb-4">
           <div class="contact-item">
               <h3>Telefono</h3>
               <p><a href="tel:+39123456789">+39 123 456 789</a></p>
