@@ -24,7 +24,7 @@ export default {
 };
 </script>
 <template>
-    <div class="col-12 d-flex flex-column align-items-start search-bar-box border">
+    <div class="col-12 d-flex flex-column align-items-start search-bar-box">
         <!-- submit senza refresh -->
         <form @submit.prevent="filterFields">
           <div class="mb-3">
