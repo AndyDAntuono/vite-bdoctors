@@ -11,28 +11,49 @@ export default {
   },
   data() {
     return {
-      store
+      store,
+      last_page: null,
+      current_page: null,
+      first_page: 1,
     }
   },
   created() {
     // recupero medici tramite api
-    let url = `${store.url}${store.doctors}`
-    axios.get(url).then((res) => {
-      store.all_doctors = res.data.results;
-      store.filteredDoctors = store.all_doctors // inizialmente medici filtrati = tutti i medici
-    }),
+    this.getDoctors(),
     // chiamo funzione get fields per recuperare le specializzazioni
-      this.getFields()
+    this.getFields()
   },
   methods: {
+    getDoctors() {
+      let url = `${store.url}${store.doctors}`
+      axios.get(url).then((res) => {
+        store.all_doctors = res.data.results.data;
+        this.last_page = res.data.results.last_page;
+        this.current_page = res.data.results.current_page;
+        // console.log(res.data.results)
+        store.filteredDoctors = store.all_doctors // inizialmente medici filtrati = tutti i medici
+      })
+    },
+    //paginazione
+    goToPage(page){
+      this.current_page = page;
+      let url_page = `${store.url}${store.doctors}`
+      axios.get(url_page, { params: { page: page } }).then((res) => {
+        store.all_doctors = res.data.results.data;
+        // update dottori filtrati
+        store.filteredDoctors = store.all_doctors
+        // update ultima pagina
+        this.last_page = res.data.results.last_page
+      })
+    },
     // funzione di recupero di tutte le specializzazioni e recovery in fields_list
     getFields() {
-      let fieldsurl = `${store.url}${store.doctors}${store.search}`
+      let fieldsurl = `${store.url}${store.fields}`
       axios.get(fieldsurl).then((res) => {
         console.log(res.data.results)
         store.fields_list = res.data.results
       })
-    }
+    },
   }
 };
 </script>
@@ -57,6 +78,25 @@ export default {
   <div class="container my-5">
     <div class="row gy-3">
       <DoctorCard v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="Page navigation example" class="my-4">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" :class="current_page == 1 ? 'disabled' : ''" @click="goToPage(current_page - 1)">Precedente</a>
+            </li>
+            <li class="page-item" v-for="num_of_page in last_page" :key="num_of_page">
+              <a class="page-link" href="#" @click="goToPage(num_of_page)">{{num_of_page}}</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" :class="current_page == last_page ? 'disabled' : ''"  @click="goToPage(current_page + 1)">Successivo</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </template>

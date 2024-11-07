@@ -18,6 +18,7 @@ export default {
         // Se nessuna specializzazione è selezionata, ripristina tutti i medici
         store.filteredDoctors = [...store.all_doctors]
       }
+      
     }
   }
 };
