@@ -12,9 +12,9 @@ export default {
   data() {
     return {
       store,
-      last_page: null,
-      current_page: null,
-      first_page: 1,
+      // last_page: null,
+      // current_page: null,
+      // first_page: 1,
     }
   },
   created() {
@@ -27,9 +27,10 @@ export default {
     getDoctors() {
       let url = `${store.url}${store.doctors}`
       axios.get(url).then((res) => {
-        store.all_doctors = res.data.results.data;
-        this.last_page = res.data.results.last_page;
-        this.current_page = res.data.results.current_page;
+        // store.all_doctors = res.data.results.data;
+        store.all_doctors = res.data.results;
+        // this.last_page = res.data.results.last_page;
+        // this.current_page = res.data.results.current_page;
         // console.log(res.data.results)
         store.filteredDoctors = store.all_doctors // inizialmente medici filtrati = tutti i medici
       })
@@ -63,7 +64,7 @@ export default {
     <div class="container">
       <div class="row">
         <!-- Parte superiore sinistra: descrizione -->
-        <div class="col-12 col-md-6 d-flex flex-column align-items-start description-box p-4 border">
+        <div class="col-12 col-md-6 d-flex flex-column align-items-start description-box p-4">
           <h1 class="fw-bolder text-white">Benvenuti su Bdoctors</h1>
           <p class="fw-bolder">
             Trova i migliori medici nella tua zona e specializzati in diverse discipline.
@@ -80,7 +81,7 @@ export default {
       <DoctorCard v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
     </div>
   </div>
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <div class="col-12">
         <nav aria-label="Page navigation example" class="my-4">
@@ -98,7 +99,7 @@ export default {
         </nav>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style lang="scss" scoped>
