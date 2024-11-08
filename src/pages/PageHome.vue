@@ -76,9 +76,11 @@ export default {
       </div>
     </div>
   </div>
-  <div class="container my-5">
-    <div class="row gy-3">
-      <DoctorCard v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
+  <div class="bg-cards">
+    <div class="container">
+      <div class="row gy-3">
+        <DoctorCard v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
+      </div>
     </div>
   </div>
   <!-- <div class="container">
@@ -110,7 +112,7 @@ export default {
   background-image: url('../../public/bg-home.jpg');
   background-size: cover;
   background-position: top;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,5 +121,12 @@ export default {
 
 .description-box p {
   font-size: 1rem;
+}
+
+.bg-cards{
+  background-image: url('../../public/bg-cards.jpg');
+  background-repeat: repeat;
+  background-position: -200px 0; 
+
 }
 </style>

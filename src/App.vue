@@ -31,4 +31,6 @@ export default {
 
 <style lang="scss">
 @import './styles/generals.scss';
+
+
 </style>
