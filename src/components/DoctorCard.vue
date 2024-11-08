@@ -23,6 +23,9 @@ export default {
                 </ul>
                 <span>{{doctor.address}} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})</span>
                 <p class="card-text fw-bold py-2">{{trText(doctor.performance)}}</p>
+                <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="btn btn-primary mt-3">
+                    Mostra il Profilo
+                </router-link>
             </div>
         </div>
     </div>
