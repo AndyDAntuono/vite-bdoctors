@@ -11,24 +11,24 @@ export default {
 }
 </script>
 <template>
-    <div class="col-12 col-md-6 col-lg-4 mt-5">
-        <div class="card h-100">
-            <div class="img-container mx-auto">
-                <img class="card-img-top img-fluid" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
-            </div>
-            <div class="card-body">
-                <div class="card-title fw-bolder">{{ doctor.user_name}} {{doctor.user_surname}}</div>
-                <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap">
-                    <li class="card-text me-2 fw-bold list" v-for="field in doctor.fields">{{field.name}}</li>
-                </ul>
-                <span>{{doctor.address}} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})</span>
-                <p class="card-text fw-bold py-2">{{trText(doctor.performance)}}</p>
-                <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="btn btn-primary mt-3">
-                    Mostra il Profilo
-                </router-link>
+        <div class="col-12 col-md-6 col-lg-4 mt-5 mb-3">
+            <div class="card h-100">
+                <div class="img-container mx-auto">
+                    <img class="card-img-top img-fluid" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
+                </div>
+                <div class="card-body">
+                    <div class="card-title fw-bolder">{{ doctor.user_name}} {{doctor.user_surname}}</div>
+                    <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap">
+                        <li class="card-text me-2 fw-bold list" v-for="field in doctor.fields">{{field.name}}</li>
+                    </ul>
+                    <span>{{doctor.address}} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})</span>
+                    <p class="card-text fw-bold py-2">{{trText(doctor.performance)}}</p>
+                    <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="btn btn-primary mt-3">
+                        Mostra il Profilo
+                    </router-link>
+                </div>
             </div>
         </div>
-    </div>
 </template>
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
