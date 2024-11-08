@@ -37,7 +37,6 @@ export default {
 
 <template>
   <div class="col-12 d-flex flex-column align-items-start search-bar-box">
-    <!-- Contenitore Carosello con Frecce -->
     <div class="badge-carousel-wrapper">
       <button @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
       <div class="badge-carousel" ref="carousel">
@@ -64,6 +63,8 @@ export default {
   display: flex;
   align-items: center;
   position: relative;
+  width: 100%;
+  overflow: hidden; /* Limita il carosello alla larghezza del contenitore */
 }
 .carousel-arrow {
   font-size: 1.5rem;
@@ -95,30 +96,54 @@ export default {
   margin-right: 0.5rem;
   cursor: pointer;
   white-space: nowrap;
+  text-align: center;
 }
 
-@media (max-width: 1200px) {
-  .badge-carousel-wrapper {
-    max-width: 1000px;
+/* Media Queries per i diversi dispositivi */
+@media (max-width: 1024px) { /* Laptop */
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
-@media (max-width: 768px) {
-  .badge-carousel-wrapper {
-    max-width: 700px;
+@media (max-width: 768px) { /* Tablet */
+  .badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+  }
+  .carousel-arrow {
+    font-size: 1.3rem;
   }
 }
 
-@media (max-width: 425px) {
-  .badge-carousel-wrapper {
-    max-width: 400px;
+@media (max-width: 425px) { /* Mobile L */
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+  .carousel-arrow {
+    font-size: 1.2rem;
   }
 }
 
-@media (max-width: 375px) {
-  .badge-carousel-wrapper {
-    max-width: 300px;
+@media (max-width: 375px) { /* Mobile M */
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .carousel-arrow {
+    font-size: 1.1rem;
   }
 }
 
+@media (max-width: 320px) { /* Mobile S */
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.4rem;
+  }
+  .carousel-arrow {
+    font-size: 1rem;
+  }
+}
 </style>
