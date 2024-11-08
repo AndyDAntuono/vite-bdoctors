@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-    <div class="container my-5">
+    <div class="container my-5 doctor-profile">
          <div class="row align-items-center">
              <div class="col-12 col-md-4 text-center">
                 <img class="img-doctor img-fluid" :src="doctor.thumb && doctor.thumb.startsWith('http') ? doctor.thumb : (doctor.thumb ? `http://127.0.0.1:8000/storage/${doctor.thumb}` : '')" :alt="`${doctor.user_surname}-image`">
@@ -39,9 +39,9 @@ export default {
                     <li v-for="field in doctor.fields" :key="field.id">{{ field.name }}</li>
                 </ul>
                  <h3>Contatti</h3>
-                 <p>Telefono: {{ doctor.phone_number }}</p>
+                 <p  class="text-muted">Telefono: {{ doctor.phone_number }}</p>
                  <h3>Descrizione</h3>
-                 <p>{{ doctor.performance }}</p>
+                 <p class="text-muted">{{ doctor.performance }}</p>
                  <a v-if="doctor.cv" :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" target="_blank" class="btn btn-danger">
                     Visualizza CV
                 </a>
@@ -53,6 +53,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';    
+
+.doctor-profile {
+    .img-doctor {
+        max-width: 100%;
+        border: 3px solid $aqua-green;
+        padding: 5px;
+    }
+}
 
 </style>
 
