@@ -8,39 +8,54 @@ export default {
     };
   },
   methods: {
+    // Metodo per selezionare la specializzazione e applicare il filtro
+    selectField(field) {
+      if (store.selectedField === field) {
+        store.selectedField = ""; // Deseleziona se cliccato di nuovo
+      } else {
+        store.selectedField = field;
+      }
+      this.filterFields(); // Applica il filtro
+    },
     filterFields() {
       if (store.selectedField) {
-        // Filtra i medici che hanno almeno un campo con il nome corrispondente alla specializzazione selezionata e salvo in filteredDoctors
+        // Filtra i medici con la specializzazione selezionata
         store.filteredDoctors = store.all_doctors.filter((doctor) => {
           return doctor.fields.some((field) => field.name === store.selectedField);
         });
       } else {
-        // Se nessuna specializzazione è selezionata, ripristina tutti i medici
-        store.filteredDoctors = [...store.all_doctors]
+        // Mostra tutti i medici se nessuna specializzazione è selezionata
+        store.filteredDoctors = [...store.all_doctors];
       }
-      
     }
   }
 };
 </script>
+
 <template>
-    <div class="col-12 d-flex flex-column align-items-start search-bar-box">
-        <!-- submit senza refresh -->
-        <form @submit.prevent="filterFields">
-          <div class="mb-3">
-            <select class="form-select" aria-label="select" name="" id="" v-model="store.selectedField">
-              <option value="">--Seleziona specializzazione--</option>
-              <option v-for="field, i in store.fields_list" :key="`field-${i}`" :value="field.name">{{ field.name }}
-              </option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Cerca</button>
-        </form>
-      </div>
+  <div class="col-12 d-flex flex-column align-items-start search-bar-box">
+    <div class="mb-3">
+      <!-- Genera i badge per ogni specializzazione -->
+      <span
+        v-for="(field, i) in store.fields_list"
+        :key="`field-${i}`"
+        :class="['badge', 'm-1', store.selectedField === field.name ? 'bg-primary' : 'bg-secondary']"
+        @click="selectField(field.name)"
+        style="cursor: pointer;"
+      >
+        {{ field.name }}
+      </span>
+    </div>
+  </div>
 </template>
+
 <style lang="scss" scoped>
 .search-bar-box {
-    padding: 1rem;
-    width: 100%;
-  }
+  padding: 1rem;
+  width: 100%;
+}
+.badge {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
 </style>
