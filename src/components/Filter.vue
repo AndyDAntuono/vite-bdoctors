@@ -38,7 +38,7 @@ export default {
 <template>
   <div class="col-12 d-flex flex-column align-items-start search-bar-box">
     <div class="badge-carousel-wrapper">
-      <button @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
+      <button v-if="!isMobile" @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
       <div class="badge-carousel" ref="carousel">
         <span
           v-for="(field, i) in store.fields_list"
@@ -49,7 +49,7 @@ export default {
           {{ field.name }}
         </span>
       </div>
-      <button @click="scrollRight" class="carousel-arrow right-arrow">▶</button>
+      <button v-if="!isMobile" @click="scrollRight" class="carousel-arrow right-arrow">▶</button>
     </div>
   </div>
 </template>
@@ -118,32 +118,71 @@ export default {
 }
 
 @media (max-width: 425px) { /* Mobile L */
+  .badge-carousel-wrapper {
+    flex-direction: column; /* Disposizione verticale */
+    align-items: flex-start; /* Allineamento a sinistra */
+  }
+  .badge-carousel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Scroll verticale */
+    max-height: 300px; /* Limita l'altezza per evitare overflow */
+    width: 100%;
+  }
   .badge {
+    margin-bottom: 0.5rem;
+    margin-right: 0;
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
   }
   .carousel-arrow {
-    font-size: 1.2rem;
+    display: none; /* Nascondi le frecce per la visualizzazione verticale */
   }
 }
 
 @media (max-width: 375px) { /* Mobile M */
+  .badge-carousel-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .badge-carousel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 250px;
+    width: 100%;
+  }
   .badge {
+    margin-bottom: 0.4rem;
+    margin-right: 0;
     font-size: 0.7rem;
     padding: 0.3rem 0.5rem;
   }
   .carousel-arrow {
-    font-size: 1.1rem;
+    display: none;
   }
 }
 
 @media (max-width: 320px) { /* Mobile S */
+  .badge-carousel-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .badge-carousel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 200px;
+    width: 100%;
+  }
   .badge {
+    margin-bottom: 0.3rem;
+    margin-right: 0;
     font-size: 0.65rem;
     padding: 0.25rem 0.4rem;
   }
   .carousel-arrow {
-    font-size: 1rem;
+    display: none;
   }
 }
 </style>
