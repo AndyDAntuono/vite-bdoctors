@@ -26,6 +26,25 @@ export default {
             <li v-for="(item, index) in menu" :key="index" class="ms-3">
               <router-link class="text-white text-decoration-none" :to="{ name: item.name }">{{ item.label }}</router-link>
             </li>
+
+            <li class="nav-item dropdown ms-3">
+              <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sei un dottore?
+              </a>
+              <!-- Si aprono in un'altra scheda (uso di _blank) -->
+              <ul class="dropdown-menu" aria-labelledby="doctorDropdown">
+                <li>
+                  <a class="dropdown-item" href="http://127.0.0.1:8000/register" target="_blank">
+                    Registrati
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="http://127.0.0.1:8000/" target="_blank">
+                    Area professionisti
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
