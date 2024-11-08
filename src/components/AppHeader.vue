@@ -22,13 +22,13 @@ export default {
           </router-link>
 
           <!-- Menu di navigazione -->
-          <ul class="nav-list d-flex mb-0">
+          <ul class="nav-list d-flex align-items-center mb-0">
             <li v-for="(item, index) in menu" :key="index" class="ms-3">
               <router-link class="text-white text-decoration-none" :to="{ name: item.name }">{{ item.label }}</router-link>
             </li>
 
             <li class="nav-item dropdown ms-3">
-              <a class="nav-link dropdown-toggle text-white fw-bold custom-dropdown" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle fw-bold custom-dropdown" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sei un dottore?
               </a>
               <!-- Si aprono in un'altra scheda (uso di _blank) -->
@@ -69,13 +69,18 @@ export default {
 }
 
 .logo {
-  width: 40px; 
+  width: 70px; 
   height: auto;
 }
 
 .custom-dropdown {
-  background-color: $aqua-green;
-  color: $dark-grey;
-  padding: 8px 10px;
+  background-color: $mint-green;
+  color: $navy-blue;
+  padding: 8px 12px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: $aqua-green;
+    color: $pure-white;
+  }
 }
 </style>
