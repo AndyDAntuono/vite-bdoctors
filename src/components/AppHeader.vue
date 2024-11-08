@@ -11,25 +11,25 @@ export default {
 </script>
 
 <template>
-  <header class="header text-white">
+  <header class="header">
     <div class="container">
       <div class="row">
-        <div class="col-12 d-flex justify-content-between align-items-center py-3">
+        <div class="col-12 d-flex justify-content-between align-items-center padding-13">
          
           <router-link to="/" class="d-flex align-items-center text-white text-decoration-none">
-            <img src="../../public/logo.png" alt="Logo" class="logo me-2" />
-            <span class="fs-3">BDoctors</span>
+            <img src="../../public/logo.png" alt="Logo" class="logo me-3" />
+            <span class="fs-3 links">BDoctors</span>
           </router-link>
 
           <!-- Menu di navigazione -->
           <ul class="nav-list d-flex align-items-center mb-0">
-            <li v-for="(item, index) in menu" :key="index" class="ms-3">
-              <router-link class="text-white text-decoration-none" :to="{ name: item.name }">{{ item.label }}</router-link>
+            <li v-for="(item, index) in menu" :key="index">
+              <router-link class="text-decoration-none links" :to="{ name: item.name }">{{ item.label }}</router-link>
             </li>
 
             <li class="nav-item dropdown ms-3">
-              <a class="nav-link dropdown-toggle fw-bold custom-dropdown" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sei un dottore?
+              <a class="nav-link dropdown-toggle fw-bold custom-dropdown rounded" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sei un medico?
               </a>
               <!-- Si aprono in un'altra scheda (uso di _blank) -->
               <ul class="dropdown-menu" aria-labelledby="doctorDropdown">
@@ -57,6 +57,9 @@ export default {
 
 .header {
   background-color: $navy-blue; 
+  .padding-13 {
+    padding: 13px;
+  }
 }
 
 .nav-list {
@@ -68,6 +71,14 @@ export default {
   font-size: 1rem;
 }
 
+.links {
+  color: $pure-white;
+  padding: 0.5rem;
+  &:hover {
+    color: $aqua-green;
+  }
+}
+
 .logo {
   width: 70px; 
   height: auto;
@@ -77,10 +88,10 @@ export default {
   background-color: $mint-green;
   color: $navy-blue;
   padding: 8px 12px;
-  transition: all 0.3s;
+  transition: all 0.5s;
   &:hover {
     background-color: $aqua-green;
-    color: $pure-white;
+    color: $navy-blue;
   }
 }
 </style>
