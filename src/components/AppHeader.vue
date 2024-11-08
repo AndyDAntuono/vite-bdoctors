@@ -18,7 +18,7 @@ export default {
          
           <router-link to="/" class="d-flex align-items-center text-white text-decoration-none">
             <img src="../../public/logo.png" alt="Logo" class="logo me-2" />
-            <span class="fw-bolder">Bdoctors</span>
+            <span class="fs-3">BDoctors</span>
           </router-link>
 
           <!-- Menu di navigazione -->
@@ -28,7 +28,7 @@ export default {
             </li>
 
             <li class="nav-item dropdown ms-3">
-              <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white fw-bold custom-dropdown" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sei un dottore?
               </a>
               <!-- Si aprono in un'altra scheda (uso di _blank) -->
@@ -71,5 +71,11 @@ export default {
 .logo {
   width: 40px; 
   height: auto;
+}
+
+.custom-dropdown {
+  background-color: $aqua-green;
+  color: $dark-grey;
+  padding: 8px 10px;
 }
 </style>
