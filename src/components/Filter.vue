@@ -4,7 +4,8 @@ export default {
   name: "Filter",
   data() {
     return {
-      store
+      store,
+      sortCriteria: "voti" // Default: Ordina per voti
     };
   },
   methods: {
@@ -14,9 +15,10 @@ export default {
       } else {
         store.selectedField = field;
       }
-      this.filterFields();
+      this.filterAndSortDoctors();
     },
-    filterFields() {
+    filterAndSortDoctors() {
+      // Filtra i dottori per specializzazione
       if (store.selectedField) {
         store.filteredDoctors = store.all_doctors.filter((doctor) => {
           return doctor.fields.some((field) => field.name === store.selectedField);
@@ -24,12 +26,20 @@ export default {
       } else {
         store.filteredDoctors = [...store.all_doctors];
       }
+
+      // Ordina i dottori per criteri di "voti" o "recensioni"
+      store.filteredDoctors.sort((a, b) => {
+        if (this.sortCriteria === "voti") {
+          return b.voti - a.voti; // Ordine decrescente per voti
+        } else if (this.sortCriteria === "recensioni") {
+          return b.recensioni - a.recensioni; // Ordine decrescente per recensioni
+        }
+        return 0;
+      });
     },
-    scrollLeft() {
-      this.$refs.carousel.scrollBy({ left: -150, behavior: 'smooth' });
-    },
-    scrollRight() {
-      this.$refs.carousel.scrollBy({ left: 150, behavior: 'smooth' });
+    changeSortCriteria(criteria) {
+      this.sortCriteria = criteria;
+      this.filterAndSortDoctors();
     }
   }
 };
@@ -38,7 +48,9 @@ export default {
 <template>
   <div class="col-12 d-flex flex-column align-items-start search-bar-box">
     <div class="badge-carousel-wrapper">
+      <!-- Frecce per scroll -->
       <button v-if="!isMobile" @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
+      <!-- Carosello per specializzazioni -->
       <div class="badge-carousel" ref="carousel">
         <span
           v-for="(field, i) in store.fields_list"
@@ -50,6 +62,15 @@ export default {
         </span>
       </div>
       <button v-if="!isMobile" @click="scrollRight" class="carousel-arrow right-arrow">▶</button>
+    </div>
+
+    <!-- Menu per selezionare criterio di ordinamento -->
+    <div class="sort-criteria">
+      <label for="sort-select">Ordina per:</label>
+      <select id="sort-select" v-model="sortCriteria" @change="changeSortCriteria(sortCriteria)">
+        <option value="voti">Voti</option>
+        <option value="recensioni">Recensioni</option>
+      </select>
     </div>
   </div>
 </template>
@@ -64,7 +85,7 @@ export default {
   align-items: center;
   position: relative;
   width: 100%;
-  overflow: hidden; /* Limita il carosello alla larghezza del contenitore */
+  overflow: hidden;
 }
 .carousel-arrow {
   font-size: 1.5rem;
@@ -99,44 +120,39 @@ export default {
   text-align: center;
 }
 
-/* Media Queries per i diversi dispositivi */
-@media (max-width: 1024px) { /* Laptop */
-  .badge {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-  }
+/* Stili per il menu di ordinamento */
+.sort-criteria {
+  margin-top: 1rem;
+  width: 100%;
+}
+.sort-criteria label {
+  font-weight: bold;
+}
+.sort-criteria select {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
 }
 
-@media (max-width: 768px) { /* Tablet */
-  .badge {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.7rem;
-  }
-  .carousel-arrow {
-    font-size: 1.3rem;
-  }
-}
-
+/* Media Queries */
 @media (max-width: 425px) { /* Mobile L */
   .badge-carousel-wrapper {
-    flex-direction: column; /* Disposizione verticale */
-    align-items: flex-start; /* Allineamento a sinistra */
+    flex-direction: column;
+    align-items: flex-start;
   }
   .badge-carousel {
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Scroll verticale */
-    max-height: 300px; /* Limita l'altezza per evitare overflow */
+    overflow-y: auto;
+    max-height: 300px;
     width: 100%;
   }
   .badge {
     margin-bottom: 0.5rem;
-    margin-right: 0;
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
   }
   .carousel-arrow {
-    display: none; /* Nascondi le frecce per la visualizzazione verticale */
+    display: none;
   }
 }
 
@@ -154,7 +170,6 @@ export default {
   }
   .badge {
     margin-bottom: 0.4rem;
-    margin-right: 0;
     font-size: 0.7rem;
     padding: 0.3rem 0.5rem;
   }
@@ -177,7 +192,6 @@ export default {
   }
   .badge {
     margin-bottom: 0.3rem;
-    margin-right: 0;
     font-size: 0.65rem;
     padding: 0.25rem 0.4rem;
   }
