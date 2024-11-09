@@ -66,15 +66,16 @@ export default {
 
     <!-- Radio Button per selezionare il criterio di ordinamento -->
     <div class="sort-criteria">
+      <h5 class="w-25 text-center p-1 rounded">Ricerca avanzata</h5>
       <label><strong>Ordina per:</strong></label>
       <div class="radio-options">
         <label>
-          <input type="radio" value="media_voti" v-model="sortCriteria" @change="changeSortCriteria('media_voti')" />
+          <input class="ratings" type="radio" value="media_voti" v-model="sortCriteria" @change="changeSortCriteria('media_voti')" />
           Media dei Voti
         </label>
         <label>
-          <input type="radio" value="numero_recensioni" v-model="sortCriteria" @change="changeSortCriteria('numero_recensioni')" />
-          Numero di Recensioni
+          <input class="reviews" type="radio" value="numero_recensioni" v-model="sortCriteria" @change="changeSortCriteria('numero_recensioni')" />
+          Numero di <br>Recensioni
         </label>
       </div>
     </div>
@@ -127,6 +128,12 @@ export default {
 }
 
 /* Stili per il menu di ordinamento */
+
+h5 {
+  background-color: #005792;
+  color: white;
+}
+
 .sort-criteria {
   margin-top: 1rem;
   width: 100%;
@@ -144,6 +151,36 @@ export default {
 }
 
 /* Media Queries */
+
+@media (max-width: 1024px) {
+  br {
+    display: none;
+  }
+
+  h5 {
+    font-size: 1.12rem;
+  }
+
+  br {
+    display: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .radio-options {
+    flex-direction: column;
+  }
+
+  h5 {
+    font-size: 1.06rem;
+  }
+
+  br {
+    display: none;
+  }
+}
+
 @media (max-width: 425px) { /* Mobile L */
   .badge-carousel-wrapper {
     flex-direction: column;
@@ -164,6 +201,19 @@ export default {
   .carousel-arrow {
     display: none;
   }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  .reatings, .reviews {
+    font-size: 1rem;
+  }
+
+  br {
+    display: block;
+  }
+
 }
 
 @media (max-width: 375px) { /* Mobile M */
@@ -186,6 +236,11 @@ export default {
   .carousel-arrow {
     display: none;
   }
+
+  h5 {
+    font-size: 0.75rem;
+  }
+
 }
 
 @media (max-width: 320px) { /* Mobile S */
