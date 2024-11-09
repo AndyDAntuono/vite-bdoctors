@@ -27,7 +27,7 @@ export default {
         store.filteredDoctors = [...store.all_doctors];
       }
 
-      // Ordina i dottori per criterio di "media dei voti" o "numero di recensioni"
+      // Ordina i dottori in base al criterio scelto ("media dei voti" o "numero di recensioni")
       store.filteredDoctors.sort((a, b) => {
         if (this.sortCriteria === "media_voti") {
           return b.media_voti - a.media_voti; // Ordine decrescente per media voti
@@ -64,13 +64,19 @@ export default {
       <button v-if="!isMobile" @click="scrollRight" class="carousel-arrow right-arrow">▶</button>
     </div>
 
-    <!-- Menu per selezionare criterio di ordinamento -->
+    <!-- Radio Button per selezionare il criterio di ordinamento -->
     <div class="sort-criteria">
-      <label for="sort-select">Ordina per:</label>
-      <select id="sort-select" v-model="sortCriteria" @change="changeSortCriteria(sortCriteria)">
-        <option value="media_voti">Media dei Voti</option>
-        <option value="numero_recensioni">Numero di Recensioni</option>
-      </select>
+      <label><strong>Ordina per:</strong></label>
+      <div class="radio-options">
+        <label>
+          <input type="radio" value="media_voti" v-model="sortCriteria" @change="changeSortCriteria('media_voti')" />
+          Media dei Voti
+        </label>
+        <label>
+          <input type="radio" value="numero_recensioni" v-model="sortCriteria" @change="changeSortCriteria('numero_recensioni')" />
+          Numero di Recensioni
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -125,12 +131,16 @@ export default {
   margin-top: 1rem;
   width: 100%;
 }
-.sort-criteria label {
-  font-weight: bold;
+.radio-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
-.sort-criteria select {
-  margin-left: 0.5rem;
-  padding: 0.5rem;
+.radio-options label {
+  cursor: pointer;
+}
+.radio-options input[type="radio"] {
+  margin-right: 0.25rem;
 }
 
 /* Media Queries */
