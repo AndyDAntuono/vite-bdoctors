@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       store,
-      sortCriteria: "voti" // Default: Ordina per voti
+      sortCriteria: "media_voti" // Default: Ordina per media dei voti
     };
   },
   methods: {
@@ -27,12 +27,12 @@ export default {
         store.filteredDoctors = [...store.all_doctors];
       }
 
-      // Ordina i dottori per criteri di "voti" o "recensioni"
+      // Ordina i dottori per criterio di "media dei voti" o "numero di recensioni"
       store.filteredDoctors.sort((a, b) => {
-        if (this.sortCriteria === "voti") {
-          return b.voti - a.voti; // Ordine decrescente per voti
-        } else if (this.sortCriteria === "recensioni") {
-          return b.recensioni - a.recensioni; // Ordine decrescente per recensioni
+        if (this.sortCriteria === "media_voti") {
+          return b.media_voti - a.media_voti; // Ordine decrescente per media voti
+        } else if (this.sortCriteria === "numero_recensioni") {
+          return b.numero_recensioni - a.numero_recensioni; // Ordine decrescente per numero recensioni
         }
         return 0;
       });
@@ -68,8 +68,8 @@ export default {
     <div class="sort-criteria">
       <label for="sort-select">Ordina per:</label>
       <select id="sort-select" v-model="sortCriteria" @change="changeSortCriteria(sortCriteria)">
-        <option value="voti">Voti</option>
-        <option value="recensioni">Recensioni</option>
+        <option value="media_voti">Media dei Voti</option>
+        <option value="numero_recensioni">Numero di Recensioni</option>
       </select>
     </div>
   </div>
