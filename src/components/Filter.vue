@@ -48,9 +48,7 @@ export default {
 <template>
   <div class="col-12 d-flex flex-column align-items-start search-bar-box">
     <div class="badge-carousel-wrapper">
-      <!-- Frecce per scroll -->
-      <button v-if="!isMobile" @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
-      <!-- Carosello per specializzazioni -->
+      <!-- Carosello per specializzazioni in verticale -->
       <div class="badge-carousel" ref="carousel">
         <span
           v-for="(field, i) in store.fields_list"
@@ -61,7 +59,6 @@ export default {
           {{ field.name }}
         </span>
       </div>
-      <button v-if="!isMobile" @click="scrollRight" class="carousel-arrow right-arrow">▶</button>
     </div>
 
     <!-- Radio Button per selezionare il criterio di ordinamento -->
@@ -89,44 +86,30 @@ export default {
 }
 .badge-carousel-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   width: 100%;
   overflow: hidden;
 }
-.carousel-arrow {
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-}
-.left-arrow {
-  margin-right: 0.5rem;
-}
-.right-arrow {
-  margin-left: 0.5rem;
-}
+
 .badge-carousel {
   display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
+  flex-direction: column; // Imposta il carosello in verticale
+  overflow-y: auto; // Abilita lo scroll verticale
+  max-height: 300px; // Altezza massima per attivare lo scroll
+  width: 100%;
   padding: 0.5rem 0;
   scroll-behavior: smooth;
-  width: 100%;
 }
-.badge-carousel::-webkit-scrollbar {
-  display: none;
-}
+
 .badge {
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
+  margin-bottom: 0.5rem; // Spazio tra i badge
   cursor: pointer;
   white-space: nowrap;
   text-align: center;
 }
-
 /* Stili per il menu di ordinamento */
 
 h5 {
@@ -206,7 +189,7 @@ h5 {
     font-size: 1rem;
   }
 
-  .reatings, .reviews {
+  .ratings, .reviews {
     font-size: 1rem;
   }
 
