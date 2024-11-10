@@ -64,7 +64,7 @@ export default {
     <div class="container">
       <div class="row">
         <!-- Parte superiore sinistra: descrizione -->
-        <div class="col-6 col-md-6 d-flex flex-column align-items-start description-box">
+        <div class="col-6 col-md-6 col-lg-6 d-flex flex-column align-items-start description-box">
           <h1 class="fw-bolder text-white w-100">Benvenuti su Bdoctors</h1>
           <p class="fw-bolder w-100">
             Trova i migliori medici in Italia!
