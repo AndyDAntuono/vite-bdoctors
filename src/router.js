@@ -4,6 +4,7 @@ import PageHome from "./pages/PageHome.vue";
 import PageContactUs from "./pages/PageContactUs.vue";
 import PageAboutUs from "./pages/PageAboutUs.vue";
 import PageSingleDoctor from "./pages/PageSingleDoctor.vue";
+import PageAdvanceResearch from "./pages/PageAdvanceResearch.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +28,11 @@ const router = createRouter({
             path: '/about-us',
             name: 'about',
             component: PageAboutUs
+        },
+        {
+            path: '/advanced-research',
+            name: 'advanced-research',
+            component: PageAdvanceResearch
         }
     ]
 });
