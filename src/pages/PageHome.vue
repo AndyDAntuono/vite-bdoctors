@@ -67,10 +67,12 @@ export default {
         <div class="col-12 col-md-6 d-flex flex-column align-items-start description-box p-4">
           <h1 class="fw-bolder text-white">Benvenuti su Bdoctors</h1>
           <p class="fw-bolder">
-            Trova i migliori medici nella tua zona e specializzati in diverse discipline.
-            Usa la barra di ricerca per filtrare per specializzazione e città.
+            Trova i migliori medici in Italia!
+            Fai click su una specializzazione per trovare il medico che fa per te.
           </p>
         </div>
+        </div>
+        <div class="row">
         <!-- Parte inferiore sinistra: barra di ricerca inserita in una componente -->
         <Filter />
       </div>
