@@ -53,7 +53,7 @@ export default {
         <span
           v-for="(field, i) in store.fields_list"
           :key="`field-${i}`"
-          :class="['badge', store.selectedField === field.name ? 'bg-primary' : 'bg-secondary']"
+          :class="['badge', store.selectedField === field.name ? 'bg-badge' : 'bg-secondary']"
           @click="selectField(field.name)"
         >
           {{ field.name }}
@@ -81,6 +81,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import '../styles/generals.scss';
 .search-bar-box {
   padding: 1rem;
   width: 100%;
@@ -141,6 +142,10 @@ h5 {
 
 br {
   display: none;
+}
+
+.bg-badge {
+  background-color: $navy-blue;
 }
 
 /* Media Queries */
