@@ -133,6 +133,10 @@ h5 {
   margin-right: 0.25rem;
 }
 
+br {
+  display: none;
+}
+
 /* Media Queries */
 
 @media (max-width: 1024px) {
