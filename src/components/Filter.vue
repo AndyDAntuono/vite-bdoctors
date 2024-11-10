@@ -101,7 +101,12 @@ export default {
   width: 100%;
   padding: 0.5rem 0;
   scroll-behavior: smooth;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 }
+
 
 .badge {
   font-size: 1rem;
