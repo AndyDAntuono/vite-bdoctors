@@ -46,7 +46,7 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-md-6 d-flex flex-column align-items-start search-bar-box">
+  <div class="col-12 d-flex flex-column align-items-start search-bar-box">
     <div class="badge-carousel-wrapper">
       <!-- Frecce per scroll -->
       <button v-if="!isMobile" @click="scrollLeft" class="carousel-arrow left-arrow">◀</button>
