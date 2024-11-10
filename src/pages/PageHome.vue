@@ -66,9 +66,9 @@ export default {
         <!-- Parte superiore sinistra: descrizione -->
         <div class="col-6 col-md-6 col-lg-6 d-flex flex-column align-items-start description-box">
           <h1 class="fw-bolder text-white w-100">Benvenuti su Bdoctors</h1>
-          <p class="fw-bolder w-100">
-            Trova i migliori medici in Italia!
-            Fai click su una specializzazione per trovare il medico che fa per te.
+          <p class="fw-bolder w-100 m-0">
+            Trova i migliori medici in Italia! <br>
+            Scorri tra le specializzazioni e fai click per trovare il medico adatto alle tue esigenze.
           </p>
         </div>
         </div>
