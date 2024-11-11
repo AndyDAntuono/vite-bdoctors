@@ -16,14 +16,14 @@ export default {
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>La nostra copagnia</h6>
-             <li><a href="http://localhost:5174/about-us">Chi siamo</a></li>
-             <li><a href="http://localhost:5174/contact-us">Contattaci</a></li>
+             <li><router-link to="/about-us"><a>Chi siamo</a></router-link></li>
+             <li><router-link to="/contact-us"><a>Contattaci</a></router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>Servizi</h6>
-             <li><a href="http://localhost:5174/">Home</a></li>
-             <li><a href="http://localhost:5174/advanced-research">Ricerca avanzata</a></li>
+            <li><router-link to="/"><a>Home</a></router-link></li>
+            <li><router-link to="/advanced-research"><a>Ricerca avanzata</a></router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
