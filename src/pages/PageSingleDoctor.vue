@@ -20,7 +20,10 @@ export default {
             doctor_id: this.$route.params.id,
             sending: false,
             sentSuccess: false,
-            sentTime: null
+            sentTime: null,
+            sendingReview: false,  
+            reviewSentSuccess: false,  
+            reviewSentTime: null,
         }
     },
     created() {
@@ -61,6 +64,33 @@ export default {
                     this.sending = false
                 }
             })
+        },
+
+        sendReview() {
+            this.sendingReview = true;  
+            const review = {  
+                name: this.reviewName,
+                email: this.reviewEmail,
+                content: this.reviewContent,
+                doctor_id: this.doctor.id
+            };
+
+            axios.post(`${store.url}/reviews`, review).then((res) => {
+                if (res.data.success) {
+                    this.reviewName = '';
+                    this.reviewEmail = '';
+                    this.reviewContent = '';
+                    this.sendingReview = false;
+                    this.reviewSentSuccess = true;  
+                    this.reviewSentTime = new Date().toLocaleString();
+                    this.reviews.push(res.data.review); 
+                    setTimeout(() => {
+                        this.reviewSentSuccess = false;  
+                    }, 5000);
+                } else {
+                    this.sendingReview = false;  
+                }
+            });
         }
     },
 
@@ -94,6 +124,7 @@ export default {
                 </div>
             </div>
             <div class="col-lg-4 p-3">
+               <!-- FORM INVIO MESSAGGIO -->
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia un Messaggio</h3>
                 <form @submit.prevent="sendMessage">
                     <div class="mb-3">
@@ -111,12 +142,12 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary w-100" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia messaggio'}}</button>
-                
+
                 </form>
             </div>
         </div>
     </div>
-
+    
     <!-- TOAST DI BS -->
     <div v-if="sentSuccess" class="toast show position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -127,29 +158,25 @@ export default {
         <div class="toast-body">
           Il messaggio è stato inviato con successo! Verrai contattato al più presto!
         </div>
-      </div>
-      <div class="container my-5">
+    </div>
+       <!-- FORM INVIO REVIEWS -->
+    <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col- p-3">
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia una Recensione</h3>
-                <form>
+                <form @submit.prevent="sendReview">
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Inserisci il tuo nome" required />
+                        <input v-model="reviewName" type="text" class="form-control" placeholder="Il tuo nome" required />
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="la tua email" required />
+                        <input v-model="reviewEmail" type="email" class="form-control" placeholder="Inserisci email" required />
                     </div>
                     <div class="mb-3">
-                        <textarea
-                            rows="5"
-                            class="form-control"
-                            placeholder="Scrivi la tua recensione..."
-                            required
-                        ></textarea>
+                        <textarea v-model="reviewContent" rows="5" class="form-control" placeholder="Scrivi la tua recensione..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Invia Recensione</button>
+                    <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia Recensione' }}</button>
                 </form>
-            </div>
+            </div>        
         </div>
     </div>
     <!-- Sezione recensioni -->
