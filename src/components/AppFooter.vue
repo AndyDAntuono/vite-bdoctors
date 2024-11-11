@@ -10,20 +10,20 @@ export default {
       <!-- <p class="mb-0"> Questo è il footer di B-doctors</p> -->
        <div class="row">
          <div class="col-6 col-md-3 col-lg-3">
-           <a href="#">
-             <img src="../../public/logo.png" alt="logo.png">
-           </a>
+           <router-link to="/">
+            <img src="../../public/logo.png" alt="logo.png">
+           </router-link>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>La nostra copagnia</h6>
-             <li><router-link to="/about-us"><a>Chi siamo</a></router-link></li>
-             <li><router-link to="/contact-us"><a>Contattaci</a></router-link></li>
+             <li><router-link to="/about-us">Chi siamo</router-link></li>
+             <li><router-link to="/contact-us">Contattaci</router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>Servizi</h6>
-            <li><router-link to="/"><a>Home</a></router-link></li>
-            <li><router-link to="/advanced-research"><a>Ricerca avanzata</a></router-link></li>
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/advanced-research">Ricerca avanzata</router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
