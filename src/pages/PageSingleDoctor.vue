@@ -1,13 +1,18 @@
 <script>
+import DoctorReview from '../components/DoctorReview.vue';
 import { setTransitionHooks } from 'vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
 export default {
+    components: {  
+        DoctorReview,
+    },
     data() {
         return {
             store,
             doctor: null,
+            reviews: [],
             name: '',
             surname: '',
             email: '',
@@ -26,6 +31,7 @@ export default {
             axios.get(`${store.url}/doctors/${this.$route.params.slug}`).then(res => {
                 if (res.data.success) {
                     this.doctor = res.data.results;
+                    this.reviews = res.data.results.reviews; 
                 }
             });
         },
@@ -122,6 +128,38 @@ export default {
           Il messaggio è stato inviato con successo! Verrai contattato al più presto!
         </div>
       </div>
+      <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="fs-5 fw-bold text-uppercase">Lascia una Recensione</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Inserisci il tuo nome" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="la tua email" required />
+                    </div>
+                    <div class="mb-3">
+                        <textarea
+                            rows="5"
+                            class="form-control"
+                            placeholder="Scrivi la tua recensione..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Invia Recensione</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Sezione recensioni -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <DoctorReview  v-for="review in reviews" :key="review.id" :review="review" />
+            </div>
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
