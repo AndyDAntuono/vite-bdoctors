@@ -13,7 +13,9 @@ export default {
             email: '',
             content: '',
             doctor_id: this.$route.params.id,
-            feedback: null
+            sending: false,
+            sentSuccess: false,
+            sentTime: null
         }
     },
     created() {
@@ -28,6 +30,7 @@ export default {
             });
         },
         sendMessage() {
+            this.sending = true;
             const message = {
                 name: this.name,
                 surname: this.surname,
@@ -38,19 +41,18 @@ export default {
 
             axios.post(`${store.url}/messages`, message).then((res) => {
                 if (res.data.success) {
-                    this.feedback = {
-                        type: 'alert-success',
-                        text: 'Messaggio inviato con successo! Il medico vi risponderà il prima possibile'
-                    };
                     this.content = '';
                     this.name = '';
                     this.surname = '';
                     this.email = '';
+                    this.sending = false
+                    this.sentSuccess = true
+                    this.sentTime = new Date().toLocaleString();
+                    setTimeout(() => {
+                        this.sentSuccess = false
+                    }, 5000)
                 } else {
-                    this.feedback = {
-                        type: 'alert-danger',
-                        text: 'Errore nell\'invio del messaggio. Riprova più tardi'
-                    }
+                    this.sending = false
                 }
             })
         }
@@ -102,15 +104,24 @@ export default {
                         <textarea v-model="content" rows="5" class="form-control"
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Invia Messaggio</button>
+                    <button type="submit" class="btn btn-primary w-100" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia messaggio'}}</button>
                 
                 </form>
-                <div v-if="feedback" class="alert my-3" :class="feedback.type">
-                    <p>{{ feedback.text }}</p>
-                </div>
             </div>
         </div>
     </div>
+
+    <!-- TOAST DI BS -->
+    <div v-if="sentSuccess" class="toast show position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto toast-title">Messaggio inviato!</strong>
+          <small>{{sentTime}}</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" @click="sentSuccess = false"></button>
+        </div>
+        <div class="toast-body">
+          Il messaggio è stato inviato con successo! Verrai contattato al più presto!
+        </div>
+      </div>
 </template>
 
 <style lang="scss" scoped>
@@ -156,6 +167,19 @@ export default {
                 font-weight: bold;
             }
         }
+    }
+}
+
+.toast {
+    background-color: $navy-blue;
+    bottom: 20px;
+    right: 20px;
+    .toast-header {
+        background-color: $navy-blue;
+        border-bottom: 1px solid $pure-white;
+    }
+    .toast-header, .toast-body {
+        color: $pure-white;
     }
 }
 </style>
