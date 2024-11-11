@@ -10,27 +10,26 @@ export default {
       <!-- <p class="mb-0"> Questo è il footer di B-doctors</p> -->
        <div class="row">
          <div class="col-6 col-md-3 col-lg-3">
-           <a href="#">
-             <img src="../../public/logo.png" alt="logo.png">
-           </a>
+           <router-link to="/">
+            <img src="../../public/logo.png" alt="logo.png">
+           </router-link>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>La nostra copagnia</h6>
-             <li><a href="">Chi siamo</a></li>
-             <li><a href="">Contattaci</a></li>
-             <li><a href="">Lavora con noi</a></li>
+             <li><router-link to="/about-us">Chi siamo</router-link></li>
+             <li><router-link to="/contact-us">Contattaci</router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>Servizi</h6>
-             <li><a href="">Ricerca medico</a></li>
-             <li><a href="">Prenota una visita</a></li>
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/advanced-research">Ricerca avanzata</router-link></li>
            </ul>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
            <ul class="list-unstyled"><h6>Medici</h6>
-             <li><a href="">Accedi</a></li>
-             <li><a href="">Registrati</a></li>
+             <li><a href="http://127.0.0.1:8000/login" target="_blank">Accedi</a></li>
+             <li><a href="http://127.0.0.1:8000/register" target="_blank">Registrati</a></li>
            </ul>
          </div>
         <div class="row">
