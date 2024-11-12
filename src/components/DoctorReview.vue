@@ -12,7 +12,7 @@ export default {
 
 <template>
     <div class="review-card my-2">
-        <div class="d-flex align-items-center">
+        <div class="d-flex">
             <i class="bi bi-person-fill me-2 text-primary"></i>
             <h5 class="review-name">{{ review.name }}</h5>
         </div>
@@ -59,7 +59,7 @@ $separator-color: #d1d8e0;
         line-height: 1.5;
         color: $primary-text-color;
         font-weight: normal;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        //text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 }
 

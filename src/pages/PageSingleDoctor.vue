@@ -100,7 +100,7 @@ export default {
 <template>
     <div class="container my-5 doctor-profile">
         <div class="row">
-            <div class="col-lg-8 d-flex flex-row align-items-start">
+            <div class="col-lg-8 col-md-12 col-12 d-flex flex-row align-items-start">
                 <div class="profile-image-container">
                     <img class="profile-image img-fluid"
                     v-if="doctor && doctor.thumb" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
