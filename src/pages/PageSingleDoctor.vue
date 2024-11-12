@@ -158,9 +158,9 @@ export default {
                     <p class="contact mt-1">Telefono: {{ doctor.phone_number }}</p>
                     <h3 class="profile-section-title mt-1">Descrizione</h3>
                     <p class="profile-description mt-1">{{ doctor.performance }}</p>
-                    <a v-if="doctor.cv" :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" target="_blank"
-                        class="btn btn-secondary fs-5 mt-3">
-                        Visualizza CV
+                    <a v-if="doctor.cv && !doctor.cv.startsWith('https://example')" :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" 
+                    target="_blank" class="btn btn-secondary fs-5 mt-3">
+                    Visualizza CV
                     </a>
                 </div>
             </div>
