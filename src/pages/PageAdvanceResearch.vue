@@ -39,28 +39,31 @@ export default {
 <template>
     <div class="container my-5">
         <div class="row">
+            <div class="col-12">
+                <h1 class="text-center my-4 title">Ricerca avanzata</h1>
+            </div>
             <div class="col-12">           
-                <form>
+                <form class="py-4 px-3 rounded">
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="name" class="form-label fw-bold">Nome</label>
                             <input type="text" class="form-control" id="" placeholder="Inserisci il nome">
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="surname" class="form-label fw-bold">Cognome</label>
                             <input type="text" class="form-control" id="" placeholder="Inserisci il cognome">
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="city" class="form-label fw-bold">Città</label>
                             <input type="text" class="form-control" id="" placeholder="Inserisci la città">
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="phone" class="form-label fw-bold">Numero di Telefono</label>
                             <input type="text" class="form-control" id="" placeholder="Inserisci il numero di telefono">
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="fields" class="form-label fw-bold">Specializzazione</label>
                             <select class="form-select" aria-label="select" v-model="store.selectedField">
                                 <option value="">Seleziona specializzazione</option>
@@ -69,7 +72,7 @@ export default {
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="average-vote" class="form-label fw-bold">Media Voto</label>
                             <select class="form-select" id="">
                                 <option value="">Seleziona media voto</option>
@@ -78,7 +81,7 @@ export default {
                         </div>
 
                         <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-primary">Cerca</button>
+                            <div class="d-flex justify-content-center"><button type="submit" class="send px-3">Cerca</button></div>
                         </div>
                     </div>
                 </form>
@@ -94,4 +97,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
+title {
+    color: $navy-blue;
+}
+form {
+    background-color: $light-gray;
+    color: $navy-blue;
+    box-shadow: 2px 2px 5px $dark-grey;
+}
 </style>
