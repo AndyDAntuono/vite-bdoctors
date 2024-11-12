@@ -1,6 +1,5 @@
 <script>
 import DoctorReview from '../components/DoctorReview.vue';
-import { setTransitionHooks } from 'vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
