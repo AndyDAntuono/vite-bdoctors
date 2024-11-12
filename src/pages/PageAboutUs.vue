@@ -62,7 +62,7 @@ export default {
         <p>
           Su BDoctors, puoi cercare il medico giusto per te in base alla specializzazione, alla posizione e alla disponibilità. La nostra piattaforma ti permette di prenotare facilmente una visita, con pochi clic.
         </p>
-        <a href="doctors.html" class="cta-button">Trova un Medico</a>
+        <router-link to="/advanced-research" class="find-doc-link">Trova un medico</router-link>
       </div>
     </div>
   </div>
@@ -77,6 +77,15 @@ img {
 
 h2 {
   color: #005792;
+}
+
+.find-doc-link {
+  text-decoration: none;
+  color: black;
+}
+
+.find-doc-link:hover {
+  color: #76C7C0;
 }
 
 @media (max-width: 1200px) {
