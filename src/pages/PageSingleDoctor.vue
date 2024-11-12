@@ -135,12 +135,14 @@ export default {
 <template>
     <div class="container my-5 doctor-profile">
         <div class="row">
-            <div class="col-lg-8 d-flex flex-row align-items-start">
-                <div class="profile-image-container">
+            <div class="col-12">
+                <div class="profile-image-container mx-auto my-5">
                     <img class="profile-image img-fluid"
                     v-if="doctor && doctor.thumb" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
                         
                 </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
                 <div class="profile-info" v-if="doctor">
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 class="name">{{ doctor.user_name }} {{ doctor.user_surname }}</h2>
@@ -158,14 +160,14 @@ export default {
                     <h3 class="profile-section-title mt-1">Descrizione</h3>
                     <p class="profile-description mt-1">{{ doctor.performance }}</p>
                     <a v-if="doctor.cv && !doctor.cv.startsWith('https://example')" :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" 
-                    target="_blank" class="btn btn-secondary fs-5 mt-3">
+                    target="_blank" class="btn btn-secondary fs-5 my-3">
                     Visualizza CV
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4 p-3">
+            <div class="col-lg-6 col-md-6 col-12">
                <!-- FORM INVIO MESSAGGIO -->
-                <h3 class="fs-5 fw-bold text-uppercase">Lascia un Messaggio</h3>
+                <h3 class="fs-5 fw-bold text-uppercase my-3">Lascia un Messaggio</h3>
                 <form @submit.prevent="sendMessage">
                     <div class="mb-3">
                         <input v-model="name" type="text" class="form-control" placeholder="Il tuo nome" />
@@ -181,8 +183,9 @@ export default {
                         <textarea v-model="content" rows="5" class="form-control"
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia messaggio'}}</button>
-
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -202,14 +205,24 @@ export default {
        <!-- FORM INVIO REVIEWS -->
     <div class="container">
         <div class="row">
-            <div class="col- p-3">
+            <div class="col-12 p-3">
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia una Recensione</h3>
                 <form @submit.prevent="sendReview">
-                    <div class="mb-3">
-                        <input v-model="reviewName" type="text" class="form-control" placeholder="Il tuo nome" />
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <input v-model="reviewName" type="text" class="form-control mb-3" placeholder="Il tuo nome"/>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <input v-model="reviewEmail" type="email" class="form-control mb-3" placeholder="Inserisci email" required />
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <input v-model="reviewEmail" type="email" class="form-control" placeholder="Inserisci email" required />
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea v-model="reviewContent" rows="5" class="form-control my-3" placeholder="Scrivi la tua recensione..." required></textarea>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success w-25 my-3" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <textarea v-model="reviewContent" rows="5" class="form-control" placeholder="Scrivi la tua recensione..." required></textarea>
@@ -228,7 +241,7 @@ export default {
         </div>
     </div>
     <!-- Sezione recensioni -->
-    <div class="container my-5">
+    <div class="container my-3">
         <div class="row">
             <div class="col-12">
                 <DoctorReview  v-for="review in reviews" :key="review.id" :review="review" />
