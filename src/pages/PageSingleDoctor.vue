@@ -143,8 +143,9 @@ export default {
                         <textarea v-model="content" rows="5" class="form-control"
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
-
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
+                    </div>
                 </form>
             </div>
         </div>
