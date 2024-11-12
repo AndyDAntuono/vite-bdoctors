@@ -4,6 +4,8 @@ export const store = reactive({
     url: 'http://127.0.0.1:8000/api',
     doctors: '/doctors',
     fields: '/fields',
+    messages: '/messages',
+    reviews: '/reviews',
     selectedField: "",
     all_doctors: [],
     fields_list: [],

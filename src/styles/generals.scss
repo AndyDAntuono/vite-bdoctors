@@ -26,3 +26,63 @@ body {
 header {
     box-shadow: 0 3px 5px $dark-grey;
 }
+
+//buttons
+.send,
+.back,
+.show {
+    color: $pure-white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px $dark-grey;
+    padding: 10px 12px;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.1s;
+
+    &:active {
+        box-shadow: 1px 1px 3px $dark-grey;
+        transform: translateY(2px);
+    }
+}
+
+.send {
+    letter-spacing: 1px;
+    background-color: $navy-blue;
+
+    &:hover {
+        background-color: $aqua-green;
+    }
+
+    &:active {
+        background-color: $navy-blue;
+    }
+}
+
+.back {
+    background-color: $dark-grey;
+    color: $pure-white;
+
+    &:hover {
+        background-color: $light-gray;
+        color: $navy-blue;
+    }
+
+    &:active {
+        background-color: $dark-grey;
+        color: $pure-white;
+    }
+}
+
+.show {
+    background-color: $aqua-green;
+    color: $pure-white;
+
+    &:hover {
+        background-color: $mint-green;
+        color: $navy-blue;
+    }
+
+    &:active {
+        background-color: $aqua-green;
+        color: $pure-white;
+    }
+}

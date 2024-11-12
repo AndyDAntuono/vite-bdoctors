@@ -69,7 +69,7 @@ export default {
                 doctor_id: this.doctor.id
             }
 
-            axios.post(`${store.url}/messages`, message).then((res) => {
+            axios.post(`${store.url}${store.messages}`, message).then((res) => {
                 if (res.data.success) {
                     //pulisco il modulo dopo l'invio del messaggio
                     this.content = '';
@@ -104,7 +104,7 @@ export default {
                 doctor_id: this.doctor.id
             };
 
-            axios.post(`${store.url}/reviews/${this.doctor.slug}`, review).then((res) => {
+            axios.post(`${store.url}${store.reviews}/${this.doctor.slug}`, review).then((res) => {
                 console.log(res.data.review);
                 if (res.data.success) {
                     this.reviews.push(res.data.review);
@@ -189,7 +189,7 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
+                        <button type="submit" class="send w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
                     </div>
                 </form>
             </div>
@@ -212,19 +212,19 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col-12 p-3">
-                <h3 class="fs-5 fw-bold text-uppercase">Lascia una Recensione</h3>
+                <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
                 <form @submit.prevent="sendReview">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
-                            <input v-model="reviewName" type="text" class="form-control mb-3" placeholder="Il tuo nome"/>
+                            <input v-model="reviewName" type="text" class="form-control mb-3" placeholder="Il tuo nome (facoltativo)"/>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
-                            <input v-model="reviewEmail" type="email" class="form-control mb-3" placeholder="Inserisci email" required />
+                            <input v-model="reviewEmail" type="email" class="form-control mb-3" placeholder="Inserisci email*" required />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <textarea v-model="reviewContent" rows="5" class="form-control my-3" placeholder="Scrivi la tua recensione..." required></textarea>
+                            <textarea v-model="reviewContent" rows="5" class="form-control my-3" placeholder="Scrivi la tua recensione*" required></textarea>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="mb-3 text-center">
@@ -237,11 +237,10 @@ export default {
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-success w-25 my-3" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                                <button type="submit" class="send w-25 my-3" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia Recensione' }}</button>
                 </form>
             </div>
         </div>
@@ -250,7 +249,15 @@ export default {
     <div class="container my-3">
         <div class="row">
             <div class="col-12">
+                <h3 class="text-center">
+                    Recensioni:
+                </h3>
+            </div>
+            <div class="col-12" v-if="reviews && reviews.length > 0">
                 <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
+            </div>
+            <div class="col-12" v-else>
+                <h4 class="text-danger text-center my-4">Nessuna recensione</h4>
             </div>
         </div>
     </div>
