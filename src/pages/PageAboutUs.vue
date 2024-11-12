@@ -62,7 +62,7 @@ export default {
         <p>
           Su BDoctors, puoi cercare il medico giusto per te in base alla specializzazione, alla posizione e alla disponibilità. La nostra piattaforma ti permette di prenotare facilmente una visita, con pochi clic.
         </p>
-        <a href="doctors.html" class="cta-button">Trova un Medico</a>
+        <p><router-link to="/advanced-research">Trova un medico</router-link></p>
       </div>
     </div>
   </div>
