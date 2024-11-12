@@ -4,7 +4,6 @@ export default {
     props: {
         review: {
             type: Object,
-           
         }
     }
 };
@@ -29,10 +28,10 @@ export default {
 @import '../styles/generals.scss';
 
 // Nuovi colori
-$card-bg-color: #f5f7fa; 
-$primary-text-color: #333333; 
-$secondary-text-color: #4a90e2; 
-$separator-color: #d1d8e0; 
+$card-bg-color: #f5f7fa;
+$primary-text-color: #333333;
+$secondary-text-color: #4a90e2;
+$separator-color: #d1d8e0;
 
 .review-card {
     border: 1.5px solid $separator-color;
@@ -47,13 +46,6 @@ $separator-color: #d1d8e0;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    .review-email {
-        font-size: 0.8rem;
-        color: $secondary-text-color;
-        font-weight: lighter;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    }
-
     .review-content {
         font-size: 1rem;
         line-height: 1.5;
@@ -65,7 +57,7 @@ $separator-color: #d1d8e0;
 
 .custom-hr {
     height: 3px;
-    width: 100%; 
+    width: 100%;
     background-color: $separator-color;
     border: none;
     margin: 1.5rem auto;
