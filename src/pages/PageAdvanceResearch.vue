@@ -10,6 +10,13 @@ export default {
     data() {
         return {
             store,
+            data: {
+                name: '',
+                surname: '',
+                city: '',
+                phone: '',
+                averageVote: ''
+            }
         };
     },
     created() {
@@ -47,21 +54,21 @@ export default {
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="name" class="form-label fw-bold">Nome</label>
-                            <input type="text" class="form-control" id="" placeholder="Inserisci il nome">
+                            <input v-model="name" type="text" class="form-control" id="" placeholder="Inserisci il nome">
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="surname" class="form-label fw-bold">Cognome</label>
-                            <input type="text" class="form-control" id="" placeholder="Inserisci il cognome">
+                            <input v-model="surname" type="text" class="form-control" id="" placeholder="Inserisci il cognome">
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="city" class="form-label fw-bold">Città</label>
-                            <input type="text" class="form-control" id="" placeholder="Inserisci la città">
+                            <input v-model="city" type="text" class="form-control" id="" placeholder="Inserisci la città">
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="phone" class="form-label fw-bold">Numero di Telefono</label>
-                            <input type="text" class="form-control" id="" placeholder="Inserisci il numero di telefono">
+                            <input v-model="phone" type="text" class="form-control" id="" placeholder="Inserisci il numero di telefono">
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="fields" class="form-label fw-bold">Specializzazione</label>
@@ -74,8 +81,8 @@ export default {
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="average-vote" class="form-label fw-bold">Media Voto</label>
-                            <select class="form-select" id="">
-                                <option value="">Seleziona media voto</option>
+                            <select v-model="name" class="form-select" id="">
+                                <option value="averageVote">Seleziona media voto</option>
                                 <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
                             </select>
                         </div>
