@@ -85,6 +85,7 @@ export default {
             };
 
             axios.post(`${store.url}/reviews`, review).then((res) => {
+                console.log(res.data.review)
                 if (res.data.success) {
                     this.reviewName = '';
                     this.reviewEmail = '';
@@ -193,7 +194,7 @@ export default {
                     <div class="mb-3">
                         <label for="rating" class="form-label">Voto</label>
                         <div class="star-rating">
-                            <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)" style="font-size: 2rem; cursor: pointer; color: #ff9900;"></i>
+                            <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
                         </div>
                     </div>
                     <!-- FINE VOTAZIONE -->
@@ -268,6 +269,16 @@ export default {
     }
     .toast-header, .toast-body {
         color: $pure-white;
+    }
+}
+
+.bi {
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: $stars;
+    &:hover {
+        color: $stars-hover;
     }
 }
 </style>
