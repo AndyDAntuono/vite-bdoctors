@@ -219,23 +219,24 @@ export default {
                     <div class="row">
                         <div class="col-12">
                             <textarea v-model="reviewContent" rows="5" class="form-control my-3" placeholder="Scrivi la tua recensione..." required></textarea>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="mb-3 text-center">
+                                <label for="rating" class="form-label">Inserisci valutazione</label>
+                                <div class="star-rating text-center">
+                                    <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
+                                </div>
+                            </div>
+                            <!-- FINE VOTAZIONE -->
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success w-25 my-3" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <textarea v-model="reviewContent" rows="5" class="form-control" placeholder="Scrivi la tua recensione..." required></textarea>
-                    </div>
                     <!-- VOTAZIONE -->
-                    <div class="mb-3">
-                        <label for="rating" class="form-label">Voto</label>
-                        <div class="star-rating">
-                            <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
-                        </div>
-                    </div>
-                    <!-- FINE VOTAZIONE -->
-                    <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia Recensione' }}</button>
+                    
                 </form>
             </div>        
         </div>
