@@ -103,11 +103,11 @@ export default {
                                 placeholder="Inserisci la città">
                         </div>
 
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="phone" class="form-label fw-bold">Numero di Telefono</label>
                             <input v-model="phone" type="text" class="form-control" id=""
                                 placeholder="Inserisci il numero di telefono">
-                        </div>
+                        </div> -->
                         <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="fields" class="form-label fw-bold">Specializzazione</label>
                             <select class="form-select" aria-label="select" v-model="store.selectedField">
