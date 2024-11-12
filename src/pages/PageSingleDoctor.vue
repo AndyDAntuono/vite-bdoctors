@@ -12,7 +12,7 @@ export default {
         return {
             store,
             doctor: null,
-            reviews: [],
+            //MESSAGE
             name: '',
             surname: '',
             email: '',
@@ -21,15 +21,22 @@ export default {
             sending: false,
             sentSuccess: false,
             sentTime: null,
-            sendingReview: false,  
+            //REVIEW
+            reviews: [],
+            sendingReview: false,
             reviewSentSuccess: false,  
             reviewSentTime: null,
+            reviewName: '',
+            reviewEmail: '',
+            reviewContent: '',
+            reviewRating: 0
         }
     },
     created() {
         this.getsingleDoctor();
     },
     methods: {
+        // recupera il doc con lo slug
         getsingleDoctor() {
             axios.get(`${store.url}/doctors/${this.$route.params.slug}`).then(res => {
                 if (res.data.success) {
@@ -38,6 +45,7 @@ export default {
                 }
             });
         },
+        //invio msgg
         sendMessage() {
             this.sending = true;
             const message = {
@@ -65,13 +73,14 @@ export default {
                 }
             })
         },
-
+        // invio recensione
         sendReview() {
             this.sendingReview = true;  
             const review = {  
                 name: this.reviewName,
                 email: this.reviewEmail,
                 content: this.reviewContent,
+                rating: this.reviewRating,
                 doctor_id: this.doctor.id
             };
 
@@ -80,6 +89,7 @@ export default {
                     this.reviewName = '';
                     this.reviewEmail = '';
                     this.reviewContent = '';
+                    this.reviewRating = 0;
                     this.sendingReview = false;
                     this.reviewSentSuccess = true;  
                     this.reviewSentTime = new Date().toLocaleString();
@@ -91,6 +101,11 @@ export default {
                     this.sendingReview = false;  
                 }
             });
+        },
+        // setting del voto
+        setRating(v) {
+            this.reviewRating = v;
+            console.log(v)
         }
     },
 
@@ -174,6 +189,14 @@ export default {
                     <div class="mb-3">
                         <textarea v-model="reviewContent" rows="5" class="form-control" placeholder="Scrivi la tua recensione..." required></textarea>
                     </div>
+                    <!-- VOTAZIONE -->
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Voto</label>
+                        <div class="star-rating">
+                            <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)" style="font-size: 2rem; cursor: pointer; color: #ff9900;"></i>
+                        </div>
+                    </div>
+                    <!-- FINE VOTAZIONE -->
                     <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia Recensione' }}</button>
                 </form>
             </div>        
