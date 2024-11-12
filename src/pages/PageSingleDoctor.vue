@@ -75,7 +75,12 @@ export default {
         },
         // invio recensione
         sendReview() {
-            this.sendingReview = true;  
+            this.sendingReview = true;
+            //'utente' più numeri casuali in caso non venga scritto alcun nome
+            if (!this.reviewName) {
+               this.reviewName = 'Utente' + Math.floor(Math.random() * 10000);
+            }
+
             const review = {  
                 name: this.reviewName,
                 email: this.reviewEmail,
@@ -182,7 +187,7 @@ export default {
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia una Recensione</h3>
                 <form @submit.prevent="sendReview">
                     <div class="mb-3">
-                        <input v-model="reviewName" type="text" class="form-control" placeholder="Il tuo nome" required />
+                        <input v-model="reviewName" type="text" class="form-control" placeholder="Il tuo nome" />
                     </div>
                     <div class="mb-3">
                         <input v-model="reviewEmail" type="email" class="form-control" placeholder="Inserisci email" required />
