@@ -15,10 +15,6 @@ export default {
             <i class="bi bi-person-fill me-2 text-primary"></i>
             <h5 class="review-name">{{ review.name }}</h5>
         </div>
-        <div class="d-flex align-items-center text-muted">
-            <i class="bi bi-envelope-fill me-2 text-primary"></i>
-            <p class="review-email mb-0">{{ review.email }}</p>
-        </div>
         <hr class="my-3 custom-hr" />
         <p class="review-content mt-1">{{ review.content }}</p>
     </div>
