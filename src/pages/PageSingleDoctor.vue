@@ -42,8 +42,22 @@ export default {
                 if (res.data.success) {
                     this.doctor = res.data.results;
                     this.reviews = res.data.results.reviews; 
+
+                    //calcolo media
+                    this.calculateAverageRating();
                 }
             });
+        },
+        //calcolo media voti
+        calculateAverageRating() {
+            if (this.reviews.length === 0) {
+            // Se non ci sono recensioni, la media è 0
+            this.doctor.averageRating = 0;
+            } else {
+            // Calcolare la somma dei voti e la media:
+            const totalVotes = this.reviews.reduce((sum, single_review) => sum + (single_review.vote || 0), 0); // con reduce riduco l'array reviews a un valore: 0 è valore iniziale per la somma, che a ogni iterazione verrà aggiornato sommandolo al voto della singola recensione iterata
+            this.doctor.averageRating = totalVotes / this.reviews.length; //qui sto solo eseguendo il calcolo finale per la media dei voti
+            }
         },
         //invio msgg
         sendMessage() {
@@ -100,6 +114,7 @@ export default {
                     this.reviewSentSuccess = true;  
                     this.reviewSentTime = new Date().toLocaleString();
                     this.reviews.push(res.data.review); 
+                    this.calculateAverageRating();
                     setTimeout(() => {
                         this.reviewSentSuccess = false;  
                     }, 5000);
@@ -128,7 +143,12 @@ export default {
                         
                 </div>
                 <div class="profile-info" v-if="doctor">
-                    <h2 class="name">{{ doctor.user_name }} {{ doctor.user_surname }}</h2>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="name">{{ doctor.user_name }} {{ doctor.user_surname }}</h2>
+                        <p v-if="doctor.averageRating !== undefined" class="mb-0 me-3">
+                            Voti: <strong class="avg">{{ doctor.averageRating.toFixed(1) }}</strong>/5
+                        </p>
+                    </div>
                     <p class="address">{{ doctor.address }}, {{ doctor.city }}</p>
                     <h3 class="fields-title">Specializzazioni</h3>
                     <ul class="fields list-unstyled">
@@ -239,6 +259,10 @@ export default {
         .name {
             font-size: 2rem;
             font-weight: bold;
+        }
+
+        .avg {
+            color: $stars;
         }
 
         .address,
