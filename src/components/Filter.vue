@@ -60,11 +60,10 @@ export default {
         </span>
       </div>
     </div>
-
+    <h5 class="w-25 text-center p-1 rounded"><router-link class="text-decoration-none text-white"to="/advanced-research">Ricerca Avanzata</router-link>
+    </h5>
     <!-- Radio Button per selezionare il criterio di ordinamento -->
     <!--<div class="sort-criteria">
-      <h5 class="w-25 text-center p-1 rounded"><router-link class="text-decoration-none text-white"to="/advanced-research">Ricerca Avanzata</router-link>
-      </h5>
       <label><strong>Ordina per:</strong></label>
       <div class="radio-options">
         <label>
