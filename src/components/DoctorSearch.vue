@@ -21,23 +21,36 @@ export default {
             </div>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                    <h5 class="card-title fw-bold">{{ doctor.user_name }} {{ doctor.user_surname }}</h5>
+                    <h5 class="card-title fw-bold">
+                        <i class="bi bi-person-fill text-white me-2"></i>
+                        {{ doctor.user_name }} {{ doctor.user_surname }}
+                    </h5>
                     <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap mb-2">
-                        <li class="me-2 list" v-for="field in doctor.fields" :key="field.id">{{ field.name }}</li>
+                        <li class="me-2 list d-flex align-items-center fw-bold" v-for="field in doctor.fields" :key="field.id">
+                            <i class="bi bi-check-circle-fill me-2 text-white"></i> 
+                            {{ field.name }}
+                        </li>
                     </ul>
-                    <span>{{ doctor.address }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})</span>
-                    <p class="card-text mt-2">{{ trText(doctor.performance) }}</p>
+                    <span >
+                        <i class="bi bi-geo-alt-fill me-2 text-white"></i> 
+                        {{ doctor.address }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})
+                    </span>
+                    <p class="card-text mt-2 fw-bold">
+                        <i class="bi bi-star-fill me-2 text-white"></i> 
+                        {{ trText(doctor.performance) }}
+                    </p>
                 </div>
-                <!-- Pulsante Mostra Profilo -->
                 <router-link 
                     :to="{ name: 'doctor', params: { slug: doctor.slug } }" 
-                    class="btn btn-primary align-self-start mt-3">
+                    class="btn btn-primary align-self-start mt-3 d-flex align-items-center justify-content-center fw-bold">
                     Mostra il Profilo
+                    <i class="bi bi-arrow-right ms-2 text-white fw-bold"></i> 
                 </router-link>
             </div>
         </div>
     </div>
 </template>
+
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
@@ -89,6 +102,7 @@ export default {
 
     .card-text {
         font-size: 15px;
+        color: $aqua-green;
     }
 }
 </style>
