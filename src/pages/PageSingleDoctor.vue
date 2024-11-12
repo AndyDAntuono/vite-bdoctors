@@ -5,7 +5,7 @@ import { store } from '../store.js';
 import axios from 'axios';
 
 export default {
-    components: {  
+    components: {
         DoctorReview,
     },
     data() {
@@ -24,7 +24,7 @@ export default {
             //REVIEW
             reviews: [],
             sendingReview: false,
-            reviewSentSuccess: false,  
+            reviewSentSuccess: false,
             reviewSentTime: null,
             reviewName: '',
             reviewEmail: '',
@@ -39,10 +39,10 @@ export default {
         // recupera il doc con lo slug
         getsingleDoctor() {
             axios.get(`${store.url}/doctors/${this.$route.params.slug}`).then(res => {
+                console.log(res.data);
                 if (res.data.success) {
                     this.doctor = res.data.results;
-                    this.reviews = res.data.results.reviews; 
-
+                    this.reviews = res.data.results.reviews;
                     //calcolo media
                     this.calculateAverageRating();
                 }
@@ -51,12 +51,12 @@ export default {
         //calcolo media voti
         calculateAverageRating() {
             if (this.reviews.length === 0) {
-            // Se non ci sono recensioni, la media è 0
-            this.doctor.averageRating = 0;
+                // Se non ci sono recensioni, la media è 0
+                this.doctor.averageRating = 0;
             } else {
-            // Calcolare la somma dei voti e la media:
-            const totalVotes = this.reviews.reduce((sum, single_review) => sum + (single_review.vote || 0), 0); // con reduce riduco l'array reviews a un valore: 0 è valore iniziale per la somma, che a ogni iterazione verrà aggiornato sommandolo al voto della singola recensione iterata
-            this.doctor.averageRating = totalVotes / this.reviews.length; //qui sto solo eseguendo il calcolo finale per la media dei voti
+                // Calcolare la somma dei voti e la media:
+                const totalVotes = this.reviews.reduce((sum, single_review) => sum + (single_review.vote || 0), 0); // con reduce riduco l'array reviews a un valore: 0 è valore iniziale per la somma, che a ogni iterazione verrà aggiornato sommandolo al voto della singola recensione iterata
+                this.doctor.averageRating = totalVotes / this.reviews.length; //qui sto solo eseguendo il calcolo finale per la media dei voti
             }
         },
         //invio msgg
@@ -72,6 +72,7 @@ export default {
 
             axios.post(`${store.url}/messages`, message).then((res) => {
                 if (res.data.success) {
+                    //pulisco il modulo dopo l'invio del messaggio
                     this.content = '';
                     this.name = '';
                     this.surname = '';
@@ -79,6 +80,7 @@ export default {
                     this.sending = false
                     this.sentSuccess = true
                     this.sentTime = new Date().toLocaleString();
+                    // avvenuto invio dopo 5s
                     setTimeout(() => {
                         this.sentSuccess = false
                     }, 5000)
@@ -90,12 +92,12 @@ export default {
         // invio recensione
         sendReview() {
             this.sendingReview = true;
-            //'utente' più numeri casuali in caso non venga scritto alcun nome
+            //'utente' + numeri casuali in caso non venga scritto alcun nome
             if (!this.reviewName) {
-               this.reviewName = 'Utente' + Math.floor(Math.random() * 10000);
+                this.reviewName = 'Utente' + Math.floor(Math.random() * 10000);
             }
-
-            const review = {  
+            // oggetto review da inviare a back
+            const review = {
                 name: this.reviewName,
                 email: this.reviewEmail,
                 content: this.reviewContent,
@@ -103,23 +105,25 @@ export default {
                 doctor_id: this.doctor.id
             };
 
-            axios.post(`${store.url}/reviews`, review).then((res) => {
-                console.log(res.data.review)
+            axios.post(`${store.url}/reviews/${this.doctor.slug}`, review).then((res) => {
+                console.log(res.data.review);
                 if (res.data.success) {
+                    this.reviews.push(res.data.review);
+                    this.calculateAverageRating();
+                    //pulisco il modulo dopo l'invio della recensione
                     this.reviewName = '';
                     this.reviewEmail = '';
                     this.reviewContent = '';
                     this.reviewRating = 0;
                     this.sendingReview = false;
-                    this.reviewSentSuccess = true;  
+                    this.reviewSentSuccess = true;
                     this.reviewSentTime = new Date().toLocaleString();
-                    this.reviews.push(res.data.review); 
-                    this.calculateAverageRating();
+                    // avvenuto invio dopo 5s
                     setTimeout(() => {
-                        this.reviewSentSuccess = false;  
+                        this.reviewSentSuccess = false;
                     }, 5000);
                 } else {
-                    this.sendingReview = false;  
+                    this.sendingReview = false;
                 }
             });
         },
@@ -138,14 +142,15 @@ export default {
         <div class="row">
             <div class="col-lg-8 d-flex flex-row align-items-start">
                 <div class="profile-image-container">
-                    <img class="profile-image img-fluid"
-                    v-if="doctor && doctor.thumb" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
-                        
+                    <img class="profile-image img-fluid" v-if="doctor && doctor.thumb"
+                        :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`"
+                        :alt="`${doctor.user_surname}-image`">
+
                 </div>
                 <div class="profile-info" v-if="doctor">
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 class="name">{{ doctor.user_name }} {{ doctor.user_surname }}</h2>
-                        <p v-if="doctor.averageRating !== undefined" class="mb-0 me-3">
+                        <p v-if="doctor.averageRating !== undefined && doctor.averageRating > 0" class="mb-0 me-3">
                             Voti: <strong class="avg">{{ doctor.averageRating.toFixed(1) }}</strong>/5
                         </p>
                     </div>
@@ -165,7 +170,7 @@ export default {
                 </div>
             </div>
             <div class="col-lg-4 p-3">
-               <!-- FORM INVIO MESSAGGIO -->
+                <!-- FORM INVIO MESSAGGIO -->
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia un Messaggio</h3>
                 <form @submit.prevent="sendMessage">
                     <div class="mb-3">
@@ -176,31 +181,33 @@ export default {
                             required />
                     </div>
                     <div class="mb-3">
-                        <input v-model="email" type="email" class="form-control" placeholder="Inserisci email" required />
+                        <input v-model="email" type="email" class="form-control" placeholder="Inserisci email"
+                            required />
                     </div>
                     <div class="mb-3">
                         <textarea v-model="content" rows="5" class="form-control"
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia messaggio'}}</button>
+                    <button type="submit" class="btn btn-primary w-100" :disabled="sending">{{ sending ? 'Invio in corso...' : 'Invia messaggio'}}</button>
 
                 </form>
             </div>
         </div>
     </div>
-    
+
     <!-- TOAST DI BS -->
     <div v-if="sentSuccess" class="toast show position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-          <strong class="me-auto toast-title">Messaggio inviato!</strong>
-          <small>{{sentTime}}</small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" @click="sentSuccess = false"></button>
+            <strong class="me-auto toast-title">Messaggio inviato!</strong>
+            <small>{{ sentTime }}</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                @click="sentSuccess = false"></button>
         </div>
         <div class="toast-body">
-          Il messaggio è stato inviato con successo! Verrai contattato al più presto!
+            Il messaggio è stato inviato con successo! Verrai contattato al più presto!
         </div>
     </div>
-       <!-- FORM INVIO REVIEWS -->
+    <!-- FORM INVIO REVIEWS -->
     <div class="container">
         <div class="row">
             <div class="col- p-3">
@@ -210,29 +217,34 @@ export default {
                         <input v-model="reviewName" type="text" class="form-control" placeholder="Il tuo nome" />
                     </div>
                     <div class="mb-3">
-                        <input v-model="reviewEmail" type="email" class="form-control" placeholder="Inserisci email" required />
+                        <input v-model="reviewEmail" type="email" class="form-control" placeholder="Inserisci email"
+                            required />
                     </div>
                     <div class="mb-3">
-                        <textarea v-model="reviewContent" rows="5" class="form-control" placeholder="Scrivi la tua recensione..." required></textarea>
+                        <textarea v-model="reviewContent" rows="5" class="form-control"
+                            placeholder="Scrivi la tua recensione..." required></textarea>
                     </div>
                     <!-- VOTAZIONE -->
                     <div class="mb-3">
                         <label for="rating" class="form-label">Voto</label>
                         <div class="star-rating">
-                            <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
+                            <i v-for="vote in 5" :key="vote"
+                                :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']"
+                                @click="setRating(vote)"></i>
                         </div>
                     </div>
                     <!-- FINE VOTAZIONE -->
-                    <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia Recensione' }}</button>
+                    <button type="submit" class="btn btn-success w-100" :disabled="sendingReview">{{ sendingReview ?
+                        'Invio in corso...' : 'Invia Recensione' }}</button>
                 </form>
-            </div>        
+            </div>
         </div>
     </div>
     <!-- Sezione recensioni -->
     <div class="container my-5">
         <div class="row">
             <div class="col-12">
-                <DoctorReview  v-for="review in reviews" :key="review.id" :review="review" />
+                <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
             </div>
         </div>
     </div>
@@ -292,11 +304,14 @@ export default {
     background-color: $navy-blue;
     bottom: 20px;
     right: 20px;
+
     .toast-header {
         background-color: $navy-blue;
         border-bottom: 1px solid $pure-white;
     }
-    .toast-header, .toast-body {
+
+    .toast-header,
+    .toast-body {
         color: $pure-white;
     }
 }
@@ -306,6 +321,7 @@ export default {
     cursor: pointer;
     transition: all 0.3s;
     color: $stars;
+
     &:hover {
         color: $stars-hover;
     }
