@@ -80,7 +80,7 @@ export default {
                 name: this.reviewName,
                 email: this.reviewEmail,
                 content: this.reviewContent,
-                rating: this.reviewRating,
+                vote: this.reviewRating,
                 doctor_id: this.doctor.id
             };
 
@@ -143,7 +143,7 @@ export default {
                 <h3 class="fs-5 fw-bold text-uppercase">Lascia un Messaggio</h3>
                 <form @submit.prevent="sendMessage">
                     <div class="mb-3">
-                        <input v-model="name" type="text" class="form-control" placeholder="Il tuo nome" required />
+                        <input v-model="name" type="text" class="form-control" placeholder="Il tuo nome" />
                     </div>
                     <div class="mb-3">
                         <input v-model="surname" type="text" class="form-control" placeholder="Il tuo cognome"
