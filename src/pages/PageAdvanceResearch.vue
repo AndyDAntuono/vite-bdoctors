@@ -41,38 +41,48 @@ export default {
         },
 
         searchDoctors() {
-            if (this.user_name == '' && this.user_surname == '' && this.city == '' && this.phone == '' && this.store.selectedField == '' && this.averageVote == '') {
-                // Se tutti i campi sono vuoti, mostra la lista completa di medici
-                store.filteredDoctors = store.all_doctors;
-                return;
-            }
+    // Se tutti i campi sono vuoti, mostra la lista completa di medici
+    if (!this.user_name && !this.user_surname && !this.city && !this.phone && !this.store.selectedField && !this.averageVote) {
+        store.filteredDoctors = store.all_doctors;
+        return;
+    }
 
-            store.filteredDoctors = store.all_doctors.filter((doc) => {
-                let matches = true;
+    // Filtra i medici in base ai criteri di ricerca
+    store.filteredDoctors = store.all_doctors.filter((doc) => {
+        let matches = true;
 
-                // Filtra per nome, cognome, città, telefono, specializzazione, voto, ecc.
-                if (this.user_name && !doc.user_name.toLowerCase().includes(this.user_name.toLowerCase())) {
-                    matches = false;
-                }
-                if (this.user_surname && !doc.user_surname.toLowerCase().includes(this.user_surname.toLowerCase())) {
-                    matches = false;
-                }
-                if (this.city && !doc.city.toLowerCase().includes(this.city.toLowerCase())) {
-                    matches = false;
-                }
-                if (this.phone && !doc.phone.includes(this.phone)) {
-                    matches = false;
-                }
-                if (this.store.selectedField && doc.field && !doc.field.toLowerCase().includes(this.store.selectedField.toLowerCase())) {
-                    matches = false;
-                }
-                if (this.averageVote && doc.average_rating !== parseFloat(this.averageVote)) {
-                    matches = false;
-                }
-
-                return matches;
-            });
+        // Filtra per nome: verifica se 'user_name' è incluso in 'doc.user_name' (case-insensitive)
+        if (this.user_name && !doc.user_name.toLowerCase().includes(this.user_name.toLowerCase())) {
+            matches = false;
         }
+
+        // Filtra per cognome: verifica se 'user_surname' è incluso in 'doc.user_surname' (case-insensitive)
+        if (this.user_surname && !doc.user_surname.toLowerCase().includes(this.user_surname.toLowerCase())) {
+            matches = false;
+        }
+
+        // Filtra per città: verifica se 'city' è incluso in 'doc.city' (case-insensitive)
+        if (this.city && !doc.city.toLowerCase().includes(this.city.toLowerCase())) {
+            matches = false;
+        }
+
+
+        // Filtra per specializzazione (selectedField):
+        // Usa `some()` per controllare se almeno una specializzazione corrisponde a quella selezionata (case-insensitive)
+        if (this.store.selectedField && (!doc.fields || !doc.fields.some(field => field.name.toLowerCase() === this.store.selectedField.toLowerCase()))) {
+            matches = false;
+        }
+
+        // Filtra per media voto (averageVote):
+        // Verifica che 'averageVote' sia uguale al valore arrotondato di 'doc.average_rating'
+        if (this.averageVote && (!doc.average_rating || Math.round(doc.average_rating) !== parseInt(this.averageVote))) {
+            matches = false;
+        }
+
+        return matches; // Ritorna true se il dottore soddisfa tutti i criteri di filtro
+    });
+}
+
     }
 };
 </script>
@@ -101,14 +111,8 @@ export default {
                             <label for="city" class="form-label fw-bold">Città</label>
                             <input v-model="city" type="text" class="form-control" id=""
                                 placeholder="Inserisci la città">
-                        </div>
-
-                        <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="phone" class="form-label fw-bold">Numero di Telefono</label>
-                            <input v-model="phone" type="text" class="form-control" id=""
-                                placeholder="Inserisci il numero di telefono">
-                        </div> -->
-                        <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        </div> 
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="fields" class="form-label fw-bold">Specializzazione</label>
                             <select class="form-select" aria-label="select" v-model="store.selectedField">
                                 <option value="">Seleziona specializzazione</option>
@@ -123,11 +127,10 @@ export default {
                                 <option value="">Seleziona media voto</option>
                                 <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
                             </select>
-                        </div> -->
-
+                        </div> 
                         <div class="col-12 mt-4">
                             <div class="d-flex justify-content-center"><button type="submit"
-                                    class="send px-3">Cerca</button></div>
+                                  class="send px-3">Cerca</button></div>
                         </div>
                     </div>
                 </form>
