@@ -36,7 +36,7 @@ export default {
                         {{ doctor.address }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})
                     </span>
                     <p class="card-text mt-2 fw-bold">
-                        <i class="bi bi-star-fill me-2 text-white"></i> 
+                        <i class="bi bi-pencil-fill me-2 text-white"></i>
                         {{ trText(doctor.performance) }}
                     </p>
                 </div>
