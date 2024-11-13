@@ -60,10 +60,8 @@ export default {
         </span>
       </div>
     </div>
-  </div>
-  <div class="col-12">
-    <p class="fw-bolder w-100">Oppure esegui una ricerca più dettagliata:</p>
-    <router-link class="text-decoration-none send mt-4" to="/advanced-research">Ricerca Avanzata</router-link>
+    <p class="fw-bolder w-100  mt-4">Oppure esegui una ricerca più dettagliata:</p>
+    <router-link class="text-decoration-none send" to="/advanced-research">Ricerca Avanzata</router-link>
   </div>
   <!-- Radio Button per selezionare il criterio di ordinamento -->
   <!--<div class="sort-criteria">
