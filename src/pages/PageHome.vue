@@ -68,7 +68,7 @@ export default {
           <h1 class="fw-bolder text-white w-100">Benvenuti su Bdoctors</h1>
           <p class="fw-bolder w-100 m-0">
             Trova i migliori medici in Italia! <br>
-            Scorri tra le specializzazioni e fai click per trovare il medico adatto alle tue esigenze.
+            Scorri tra le specializzazioni e fai click su una di esse per trovare il medico adatto alle tue esigenze.
           </p>
         </div>
         </div>

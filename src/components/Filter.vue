@@ -60,23 +60,26 @@ export default {
         </span>
       </div>
     </div>
-    <h5 class="w-25 text-center p-1 rounded"><router-link class="text-decoration-none text-white"to="/advanced-research">Ricerca Avanzata</router-link>
-    </h5>
-    <!-- Radio Button per selezionare il criterio di ordinamento -->
-    <!--<div class="sort-criteria">
-      <label><strong>Ordina per:</strong></label>
-      <div class="radio-options">
-        <label>
-          <input class="ratings" type="radio" value="media_voti" v-model="sortCriteria" @change="changeSortCriteria('media_voti')" />
-          Media dei Voti
-        </label>
-        <label>
-          <input class="reviews" type="radio" value="numero_recensioni" v-model="sortCriteria" @change="changeSortCriteria('numero_recensioni')" />
-          Numero di <br>Recensioni
-        </label>
-      </div>
-    </div>-->
   </div>
+  <div class="col-12">
+    <p class="fw-bolder w-100">Oppure esegui una ricerca più dettagliata:</p>
+    <router-link class="text-decoration-none send mt-4" to="/advanced-research">Ricerca Avanzata</router-link>
+  </div>
+  <!-- Radio Button per selezionare il criterio di ordinamento -->
+  <!--<div class="sort-criteria">
+    <label><strong>Ordina per:</strong></label>
+    <div class="radio-options">
+      <label>
+        <input class="ratings" type="radio" value="media_voti" v-model="sortCriteria" @change="changeSortCriteria('media_voti')" />
+        Media dei Voti
+      </label>
+      <label>
+        <input class="reviews" type="radio" value="numero_recensioni" v-model="sortCriteria" @change="changeSortCriteria('numero_recensioni')" />
+        Numero di <br>Recensioni
+      </label>
+    </div>
+  </div>-->
+  
 </template>
 
 <style lang="scss" scoped>
@@ -95,9 +98,9 @@ export default {
 
 .badge-carousel {
   display: flex;
-  flex-direction: column; // Imposta il carosello in verticale
-  overflow-y: auto; // Abilita lo scroll verticale
-  max-height: 300px; // Altezza massima per attivare lo scroll
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 300px;
   width: 100%;
   padding: 0.5rem 0;
   scroll-behavior: smooth;
@@ -111,16 +114,10 @@ export default {
 .badge {
   font-size: 1rem;
   padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem; // Spazio tra i badge
+  margin-bottom: 0.5rem;
   cursor: pointer;
   white-space: nowrap;
   text-align: center;
-}
-/* Stili per il menu di ordinamento */
-
-h5 {
-  background-color: #005792;
-  color: white;
 }
 
 .sort-criteria {
