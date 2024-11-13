@@ -51,16 +51,16 @@ export default {
       <!-- Carosello per specializzazioni in verticale -->
       <div class="badge-carousel" ref="carousel">
         <span
-          v-for="(field, i) in store.fields_list"
-          :key="`field-${i}`"
-          :class="['badge', store.selectedField === field.name ? 'bg-badge' : 'bg-secondary']"
-          @click="selectField(field.name)"
-        >
-          {{ field.name }}
-        </span>
+        v-for="(field, i) in store.fields_list"
+        :key="`field-${i}`"
+        :class="['badge', store.selectedField === field.name ? 'bg-badge' : 'bg-secondary']"
+        @click="selectField(field.name)"
+      >
+        {{ field.name }}
+      </span>
       </div>
     </div>
-    <p class="fw-bolder w-100  mt-4">Oppure esegui una ricerca più dettagliata:</p>
+    <p class="fw-bolder mt-4">Oppure esegui una ricerca più dettagliata:</p>
     <router-link class="text-decoration-none send" to="/advanced-research">Ricerca Avanzata</router-link>
   </div>
   <!-- Radio Button per selezionare il criterio di ordinamento -->
@@ -82,10 +82,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
+
 .search-bar-box {
   padding: 1rem;
   width: 100%;
 }
+
 .badge-carousel-wrapper {
   display: flex;
   align-items: flex-start;
@@ -102,12 +104,12 @@ export default {
   width: 100%;
   padding: 0.5rem 0;
   scroll-behavior: smooth;
+
   ::-webkit-scrollbar {
     display: none;
   }
   scrollbar-width: none;
 }
-
 
 .badge {
   font-size: 1rem;
@@ -118,142 +120,64 @@ export default {
   text-align: center;
 }
 
-.sort-criteria {
-  margin-top: 1rem;
-  width: 100%;
-}
-.radio-options {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-.radio-options label {
-  cursor: pointer;
-}
-.radio-options input[type="radio"] {
-  margin-right: 0.25rem;
-}
-
-br {
-  display: none;
-}
-
 .bg-badge {
   background-color: $navy-blue;
 }
 
-/* Media Queries */
-
-@media (max-width: 1024px) {
-  br {
-    display: none;
+@media (max-width: 992px) {
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
   }
 
-  h5 {
-    font-size: 1.12rem;
+  .badge-carousel {
+    max-height: 250px;
   }
 
-  br {
-    display: none;
+  .search-bar-box {
+    padding: 0.8rem;
   }
+}
 
+@media (max-width: 992px) and (min-width: 768px) {
+  .badge {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+  }
+  .badge-carousel {
+    max-height: 200px;
+  }
 }
 
 @media (max-width: 768px) {
-  .radio-options {
-    flex-direction: column;
-  }
-
-  h5 {
-    font-size: 1.06rem;
-  }
-
-  br {
-    display: none;
-  }
-}
-
-@media (max-width: 425px) { /* Mobile L */
-  .badge-carousel-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .badge-carousel {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 300px;
-    width: 100%;
-  }
   .badge {
-    margin-bottom: 0.5rem;
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
-  }
-  .carousel-arrow {
-    display: none;
-  }
-
-  h5 {
-    font-size: 1rem;
-  }
-
-  .ratings, .reviews {
-    font-size: 1rem;
-  }
-
-  br {
-    display: block;
-  }
-
-}
-
-@media (max-width: 375px) { /* Mobile M */
-  .badge-carousel-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .badge-carousel {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 250px;
-    width: 100%;
-  }
-  .badge {
     margin-bottom: 0.4rem;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.5rem;
-  }
-  .carousel-arrow {
-    display: none;
-  }
-
-  h5 {
-    font-size: 0.75rem;
-  }
-
-}
-
-@media (max-width: 320px) { /* Mobile S */
-  .badge-carousel-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
   }
   .badge-carousel {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    max-height: 200px;
-    width: 100%;
-  }
-  .badge {
-    margin-bottom: 0.3rem;
-    font-size: 0.65rem;
-    padding: 0.25rem 0.4rem;
-  }
-  .carousel-arrow {
-    display: none;
+    max-height: 180px;
   }
 }
+
+@media (max-width: 576px) {
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .badge-carousel {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 375px) {
+  .badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+  .badge-carousel {
+    max-height: 130px;
+  }
+}
+
 </style>

@@ -1,4 +1,4 @@
-<script>
+<script> 
 import { store } from '../store';
 import axios from 'axios';
 import DoctorCard from '../components/DoctorCard.vue';
@@ -19,40 +19,40 @@ export default {
   },
   created() {
     // recupero medici tramite api
-    this.getDoctors(),
+    this.getDoctors();
     // chiamo funzione get fields per recuperare le specializzazioni
-    this.getFields()
+    this.getFields();
   },
   methods: {
     getDoctors() {
-      let url = `${store.url}${store.doctors}`
+      let url = `${store.url}${store.doctors}`;
       axios.get(url).then((res) => {
         // store.all_doctors = res.data.results.data;
         store.all_doctors = res.data.results;
         // this.last_page = res.data.results.last_page;
         // this.current_page = res.data.results.current_page;
         // console.log(res.data.results)
-        store.filteredDoctors = store.all_doctors // inizialmente medici filtrati = tutti i medici
+        store.filteredDoctors = store.all_doctors; // inizialmente medici filtrati = tutti i medici
       })
     },
     //paginazione
     goToPage(page){
       this.current_page = page;
-      let url_page = `${store.url}${store.doctors}`
+      let url_page = `${store.url}${store.doctors}`;
       axios.get(url_page, { params: { page: page } }).then((res) => {
         store.all_doctors = res.data.results.data;
         // update dottori filtrati
-        store.filteredDoctors = store.all_doctors
+        store.filteredDoctors = store.all_doctors;
         // update ultima pagina
-        this.last_page = res.data.results.last_page
+        this.last_page = res.data.results.last_page;
       })
     },
     // funzione di recupero di tutte le specializzazioni e recovery in fields_list
     getFields() {
-      let fieldsurl = `${store.url}${store.fields}`
+      let fieldsurl = `${store.url}${store.fields}`;
       axios.get(fieldsurl).then((res) => {
-        console.log(res.data.results)
-        store.fields_list = res.data.results
+        console.log(res.data.results);
+        store.fields_list = res.data.results;
       })
     },
   }
@@ -64,9 +64,9 @@ export default {
     <div class="container">
       <div class="row">
         <!-- Parte superiore sinistra: descrizione -->
-        <div class="col-6 col-md-6 col-lg-6 d-flex flex-column align-items-start description-box">
-          <h1 class="fw-bolder text-white w-100">Benvenuti su Bdoctors</h1>
-          <p class="fw-bolder w-100 m-0">
+        <div class="col-6 col-md-6 col-lg-6 d-flex flex-column">
+          <h1 class="fw-bolder text-white">Benvenuti su Bdoctors</h1>
+          <p class="fw-bolder m-0">
             Trova i migliori medici in Italia! <br>
             Scorri tra le specializzazioni e fai click su una di esse per trovare il medico adatto alle tue esigenze.
           </p>
@@ -109,7 +109,6 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
 
-/* Sfondo immagine per la pagina */
 .home-container {
   background-image: url('../../public/bg-home.jpg');
   background-size: cover;
@@ -118,17 +117,91 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+  }
 }
 
-
-.description-box p {
-  font-size: 1rem;
-}
-
-.bg-cards{
+.bg-cards {
   background-image: url('../../public/bg-cards.jpg');
   background-repeat: repeat;
-  background-position: -200px 0; 
+  background-position: -200px 0;
+}
 
+@media (max-width: 992px) {
+  .home-container {
+    height: 80vh;
+    padding: 1.5rem;
+  }
+
+  .home-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .home-container p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+  .home-container h1 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-container p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    height: auto;
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+  }
+
+  .home-container h1 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-container p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-container {
+    height: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  .home-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-container p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .home-container {
+    height: auto;
+    padding: 1rem 0.5rem;
+  }
+
+  .home-container h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .home-container p {
+    font-size: 0.85rem;
+  }
 }
 </style>
