@@ -208,7 +208,8 @@ export default {
             Il messaggio è stato inviato con successo! Verrai contattato al più presto!
         </div>
     </div>
-    <!-- FORM INVIO REVIEWS -->
+    <div class="bg-comments">
+            <!-- FORM INVIO REVIEWS -->
     <div class="container">
         <div class="row">
             <div class="col-12 p-3">
@@ -228,7 +229,7 @@ export default {
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="mb-3 text-center">
-                                <label for="rating" class="form-label">Inserisci valutazione</label>
+                                <label for="rating" class="form-label fw-bold">Inserisci valutazione</label>
                                 <div class="star-rating text-center">
                                     <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
                                 </div>
@@ -246,7 +247,7 @@ export default {
         </div>
     </div>
     <!-- Sezione recensioni -->
-    <div class="container my-3">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-12">
                 <h3 class="text-center">
@@ -260,6 +261,7 @@ export default {
                 <h4 class="text-danger text-center my-4">Nessuna recensione</h4>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -338,5 +340,9 @@ export default {
     &:hover {
         color: $stars-hover;
     }
+}
+
+.bg-comments{
+    background-color: $warm-grey;
 }
 </style>
