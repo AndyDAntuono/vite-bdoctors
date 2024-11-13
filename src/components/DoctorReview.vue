@@ -15,6 +15,11 @@ export default {
             <i class="bi bi-person-fill me-2 text-primary"></i>
             <h5 class="review-name">{{ review.name }}</h5>
         </div>
+        <div class="review-rating mt-1">
+            <span v-for="star in 5" :key="star" class="me-1">
+                <i :class="star <= review.vote ? 'bi bi-star-fill' : 'bi bi-star'" class="text-warning"></i>
+            </span>
+        </div>
         <hr class="my-3 custom-hr" />
         <p class="review-content mt-1">{{ review.content }}</p>
     </div>
@@ -57,5 +62,11 @@ $separator-color: #d1d8e0;
     background-color: $separator-color;
     border: none;
     margin: 1.5rem auto;
+}
+
+.review-rating i {
+    font-size: 1.2rem;
+    color: $stars; 
+    transition: color 0.3s;
 }
 </style>

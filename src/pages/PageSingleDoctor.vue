@@ -28,7 +28,7 @@ export default {
             reviewName: '',
             reviewEmail: '',
             reviewContent: '',
-            reviewRating: 0
+            reviewRating: 1
         }
     },
     created() {
@@ -128,7 +128,7 @@ export default {
         },
         // setting del voto
         setRating(v) {
-            this.reviewRating = v;
+            this.reviewRating = v < 1 ? 1 : v; // Imposta `reviewRating` a 1 se `v` è inferiore a 1
             console.log(v)
         }
     },

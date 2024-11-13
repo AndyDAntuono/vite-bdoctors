@@ -6,6 +6,10 @@ export default {
     methods: {
         trText(text) {
             return text.substr(0, 60)+'...';
+        },
+
+        trAdress(text) {
+            return text.substr(0, 20)+'...';
         }
     }
 }
@@ -26,12 +30,12 @@ export default {
                         <i class="bi bi-check-circle-fill me-2 text-white"></i> {{ field.name }}
                     </li>
                 </ul>
-                <span class="fw-normal">
+                <span class="fw-bold">
                     <i class="bi bi-geo-alt-fill me-2 text-white"></i>
-                    {{ doctor.address }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})
+                    {{ trAdress( doctor.address) }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})
                 </span>
                 <p class="card-text fw-bold py-2">
-                    <i class="bi bi-star-fill me-2 text-white"></i> 
+                    <i class="bi bi-pencil-fill me-2 text-white"></i>
                     {{ trText(doctor.performance) }}
                 </p>
                 <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="show text-decoration-none mt-2 d-flex align-items-center justify-content-center fw-bold">
@@ -79,7 +83,7 @@ export default {
     }
 
     .card-title {
-        font-size: 24px;
+        font-size: 20px;
         letter-spacing: 1px;
     }
 
