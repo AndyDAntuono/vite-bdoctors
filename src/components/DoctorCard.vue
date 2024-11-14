@@ -69,12 +69,20 @@ export default {
         padding: 5px; 
         background-color: $navy-blue; 
         border-radius: 10px; 
-        max-width: 50%; 
+        max-width: 100%; 
+        max-height: 200px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
     }
 
     .card-img-top {
-        border-radius: 5px; 
+        border-radius: 5px;
         width: 100%;
+        height: auto;
+        max-height: 200px; 
+        object-fit: cover; 
     }
 
     .card-body {
