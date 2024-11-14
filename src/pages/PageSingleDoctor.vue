@@ -113,7 +113,7 @@ export default {
                     this.reviewName = '';
                     this.reviewEmail = '';
                     this.reviewContent = '';
-                    this.reviewRating = 0;
+                    this.reviewRating = 1;
                     this.sendingReview = false;
                     this.reviewSentSuccess = true;
                     this.reviewSentTime = new Date().toLocaleString();
