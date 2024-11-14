@@ -88,72 +88,102 @@ export default {
 </script>
 
 <template>
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center my-4 title">Ricerca avanzata</h1>
+    <div class="par-bg">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center my-4 title">Ricerca avanzata</h1>
+                </div>
+                <div class="col-12">
+                    <form class="py-4 px-3 rounded" @submit.prevent="searchDoctors">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-person-fill text-white me-2"></i>
+                                <label for="name" class="form-label fw-bold">Nome</label>
+                                <input v-model="user_name" type="text" class="form-control" id=""
+                                    placeholder="Inserisci il nome">
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-person-fill text-white me-2"></i>
+                                <label for="surname" class="form-label fw-bold">Cognome</label>
+                                <input v-model="user_surname" type="text" class="form-control" id=""
+                                    placeholder="Inserisci il cognome">
+                            </div>
+    
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-geo-alt-fill me-2 text-white"></i>
+                                <label for="city" class="form-label fw-bold">Città</label>
+                                <input v-model="city" type="text" class="form-control" id=""
+                                    placeholder="Inserisci la città">
+                            </div> 
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-check-circle-fill me-2 text-white"></i>
+                                <label for="fields" class="form-label fw-bold">Specializzazione</label>
+                                <select class="form-select" aria-label="select" v-model="store.selectedField">
+                                    <option value="">Seleziona specializzazione</option>
+                                    <option v-for="(field, i) in store.fields_list" :key="`field-${i}`" :value="field.name">
+                                        {{ field.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-star-fill me-2 text-white"></i>
+                                <label for="average-vote" class="form-label fw-bold">Media Voto</label>
+                                <select v-model="averageVote" class="form-select" id="">
+                                    <option value="">Seleziona media voto</option>
+                                    <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                </select>
+                            </div> 
+                            <div class="col-12 mt-4">
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="send px-3 par-bg-button">
+                                        <strong><i class="bi bi-search"></i> Cerca</strong> 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-12">
-                <form class="py-4 px-3 rounded" @submit.prevent="searchDoctors">
-                    <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="name" class="form-label fw-bold">Nome</label>
-                            <input v-model="user_name" type="text" class="form-control" id=""
-                                placeholder="Inserisci il nome">
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="surname" class="form-label fw-bold">Cognome</label>
-                            <input v-model="user_surname" type="text" class="form-control" id=""
-                                placeholder="Inserisci il cognome">
-                        </div>
-
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="city" class="form-label fw-bold">Città</label>
-                            <input v-model="city" type="text" class="form-control" id=""
-                                placeholder="Inserisci la città">
-                        </div> 
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="fields" class="form-label fw-bold">Specializzazione</label>
-                            <select class="form-select" aria-label="select" v-model="store.selectedField">
-                                <option value="">Seleziona specializzazione</option>
-                                <option v-for="(field, i) in store.fields_list" :key="`field-${i}`" :value="field.name">
-                                    {{ field.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-4 mb-3">
-                            <label for="average-vote" class="form-label fw-bold">Media Voto</label>
-                            <select v-model="averageVote" class="form-select" id="">
-                                <option value="">Seleziona media voto</option>
-                                <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
-                            </select>
-                        </div> 
-                        <div class="col-12 mt-4">
-                            <div class="d-flex justify-content-center"><button type="submit"
-                                  class="send px-3">Cerca</button></div>
-                        </div>
-                    </div>
-                </form>
+        </div>
+        <div class="container">
+            <div class="row">
+                <DoctorSearch v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <DoctorSearch v-for="doctor in store.filteredDoctors" :key="doctor.id" :doctor="doctor" />
-        </div>
-    </div>
+   
 </template>
 
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
+
+.par-bg {
+    background-color: $light-gray;
+}
+
+h1 {
+    color: $navy-blue;
+}
 
 title {
     color: $navy-blue;
 }
 
 form {
-    background-color: $light-gray;
-    color: $navy-blue;
+    background-color: $navy-blue;
+    color:  $pure-white;
     box-shadow: 2px 2px 5px $dark-grey;
 }
+
+.par-bg-button {
+    background-color: $aqua-green;
+}
+
+.par-bg-button:hover {
+    background-color: $mint-green;
+    color: $navy-blue;
+}
+
+
 </style>
