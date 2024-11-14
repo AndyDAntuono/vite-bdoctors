@@ -98,22 +98,26 @@ export default {
                     <form class="py-4 px-3 rounded" @submit.prevent="searchDoctors">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-person-fill text-white me-2"></i>
                                 <label for="name" class="form-label fw-bold">Nome</label>
                                 <input v-model="user_name" type="text" class="form-control" id=""
                                     placeholder="Inserisci il nome">
                             </div>
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-person-fill text-white me-2"></i>
                                 <label for="surname" class="form-label fw-bold">Cognome</label>
                                 <input v-model="user_surname" type="text" class="form-control" id=""
                                     placeholder="Inserisci il cognome">
                             </div>
     
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-geo-alt-fill me-2 text-white"></i>
                                 <label for="city" class="form-label fw-bold">Città</label>
                                 <input v-model="city" type="text" class="form-control" id=""
                                     placeholder="Inserisci la città">
                             </div> 
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-check-circle-fill me-2 text-white"></i>
                                 <label for="fields" class="form-label fw-bold">Specializzazione</label>
                                 <select class="form-select" aria-label="select" v-model="store.selectedField">
                                     <option value="">Seleziona specializzazione</option>
@@ -123,6 +127,7 @@ export default {
                                 </select>
                             </div>
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                <i class="bi bi-star-fill me-2 text-white"></i>
                                 <label for="average-vote" class="form-label fw-bold">Media Voto</label>
                                 <select v-model="averageVote" class="form-select" id="">
                                     <option value="">Seleziona media voto</option>
@@ -132,7 +137,7 @@ export default {
                             <div class="col-12 mt-4">
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="send px-3 par-bg-button">
-                                        <strong>Cerca</strong> 
+                                        <strong><i class="bi bi-search"></i> Cerca</strong> 
                                     </button>
                                 </div>
                             </div>
