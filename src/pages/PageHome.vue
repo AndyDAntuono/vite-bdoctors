@@ -1,4 +1,4 @@
-<script> 
+<script>
 import { store } from '../store';
 import axios from 'axios';
 import DoctorCard from '../components/DoctorCard.vue';
@@ -28,15 +28,30 @@ export default {
       let url = `${store.url}${store.doctors}`;
       axios.get(url).then((res) => {
         // store.all_doctors = res.data.results.data;
-        store.all_doctors = res.data.results;
         // this.last_page = res.data.results.last_page;
         // this.current_page = res.data.results.current_page;
         // console.log(res.data.results)
-        store.filteredDoctors = store.all_doctors; // inizialmente medici filtrati = tutti i medici
+        const doctorsObject = res.data.results;
+        // trasformo ogg in array così da poter usare sort()
+        const doctorsArray = Object.values(doctorsObject);
+
+        store.all_doctors = doctorsArray.sort((a, b) => {
+          const sponsorA = a.sponsors?.[0]?.pivot?.expiring_date;
+          const sponsorB = b.sponsors?.[0]?.pivot?.expiring_date;
+
+          if (!sponsorA && !sponsorB) return 0; // Nessuna sponsorizzazione
+          if (!sponsorA) return 1;              // A senza sponsorizzazione
+          if (!sponsorB) return -1;             // B senza sponsorizzazione
+
+          // Confronta le date in ord decr
+          return new Date(b.sponsors[0].pivot.expiring_date) - new Date(a.sponsors[0].pivot.expiring_date);
+        })
+        store.filteredDoctors = store.all_doctors;
+        // store.filteredDoctors = store.all_doctors; // inizialmente medici filtrati = tutti i medici
       })
     },
     //paginazione
-    goToPage(page){
+    goToPage(page) {
       this.current_page = page;
       let url_page = `${store.url}${store.doctors}`;
       axios.get(url_page, { params: { page: page } }).then((res) => {
@@ -71,8 +86,8 @@ export default {
             Scorri tra le specializzazioni e fai click su una di esse per trovare il medico adatto alle tue esigenze.
           </p>
         </div>
-        </div>
-        <div class="row">
+      </div>
+      <div class="row">
         <!-- Parte inferiore sinistra: barra di ricerca inserita in una componente -->
         <Filter />
       </div>
