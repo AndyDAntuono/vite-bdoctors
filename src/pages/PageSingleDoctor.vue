@@ -11,7 +11,7 @@ export default {
         return {
             store,
             doctor: null,
-            //MESSAGE
+            // MESSAGE
             name: '',
             surname: '',
             email: '',
@@ -20,7 +20,7 @@ export default {
             sending: false,
             sentSuccess: false,
             sentTime: null,
-            //REVIEW
+            // REVIEW
             reviews: [],
             sendingReview: false,
             reviewSentSuccess: false,
@@ -28,8 +28,9 @@ export default {
             reviewName: '',
             reviewEmail: '',
             reviewContent: '',
-            reviewRating: 1
-        }
+            reviewRating: 0, // Valore predefinito impostato a 0
+            reviewError: '' // Per gestire il messaggio di errore
+            }
     },
     created() {
         this.getsingleDoctor();
@@ -91,6 +92,14 @@ export default {
         // invio recensione
         sendReview() {
             this.sendingReview = true;
+
+            // Controlla se il voto è stato selezionato
+            if (this.reviewRating === 0) {
+                this.reviewError = 'Devi fornire un voto prima di poter rilasciare la tua recensione!';
+                this.sendingReview = false;
+                return;
+            }
+
             //'utente' + numeri casuali in caso non venga scritto alcun nome
             if (!this.reviewName) {
                 this.reviewName = 'Utente' + Math.floor(Math.random() * 10000);
@@ -113,8 +122,9 @@ export default {
                     this.reviewName = '';
                     this.reviewEmail = '';
                     this.reviewContent = '';
-                    this.reviewRating = 1;
+                    this.reviewRating = 0; // Reset del voto a 0
                     this.sendingReview = false;
+                    this.reviewError = ''; // Rimuove eventuali errori precedenti
                     this.reviewSentSuccess = true;
                     this.reviewSentTime = new Date().toLocaleString();
                     // avvenuto invio dopo 5s
@@ -129,6 +139,7 @@ export default {
         // setting del voto
         setRating(v) {
             this.reviewRating = v < 1 ? 1 : v; // Imposta `reviewRating` a 1 se `v` è inferiore a 1
+            this.reviewError = ''; // Resetta il messaggio di errore quando l'utente seleziona un voto
             console.log(v)
         }
     },
@@ -233,6 +244,7 @@ export default {
                                 <div class="star-rating text-center">
                                     <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
                                 </div>
+                                <p v-if="reviewError" class="text-danger mt-2">{{ reviewError }}</p>
                             </div>
                             <!-- FINE VOTAZIONE -->
                         </div>
