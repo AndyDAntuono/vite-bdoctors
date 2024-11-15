@@ -5,11 +5,15 @@ export default {
     },
     methods: {
         trText(text) {
-            return text.substr(0, 20)+'...';
+            return text.length > 20 ? text.substr(0, 20) + '...' : text;
         },
 
         trAdress(text) {
-            return text.substr(0, 20)+'...';
+            return text.length > 15 ? text.substr(0, 15) + '...' : text;
+        },
+
+        trFields(text) { 
+            return text.length > 20 ? text.substr(0, 20) + '...' : text;
         }
     }
 }
@@ -30,10 +34,10 @@ export default {
                 </div>
                 <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap">
                     <li class="card-text me-2 fw-bold list d-flex align-items-center">
-                        <i class="bi bi-check-circle-fill me-2 text-white"></i> {{ doctor.fields[0].name }}
+                        <i class="bi bi-check-circle-fill me-2 text-white"></i> {{trFields( doctor.fields[0].name )}}
                     </li>
                 </ul>
-                <span class="fw-bold">
+                <span class="fw-normal">
                     <i class="bi bi-geo-alt-fill me-2 text-white"></i>
                     {{ trAdress( doctor.address) }} ({{ doctor.city.charAt(0).toUpperCase() + doctor.city.slice(1).toLowerCase() }})
                 </span>
@@ -94,7 +98,7 @@ export default {
     }
 
     .card-title {
-        font-size: 20px;
+        font-size: 1.25rem;  
         letter-spacing: 1px;
     }
 
@@ -102,11 +106,10 @@ export default {
         color: $aqua-green;
     }
 
-    .card-text{
-        font-size: 15px;
+    .card-text {
+        font-size: 0.9375rem; 
         color: $aqua-green;
     }
-
 }
 
 .sponsored-badge {
@@ -115,13 +118,70 @@ export default {
     background-color: goldenrod;   
     color: $pure-white;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem; 
     font-weight: bold;
     border-radius: 5px;
     z-index: 10;
 
     .bi-star-fill {
         color: $pure-white;           
+    }
+}
+
+/* Media Queries for Font Sizes */
+@media (max-width: 1200px) { 
+    .card-title {
+        font-size: 1.2rem; 
+    }
+
+    .card-text {
+        font-size: 0.75rem; 
+    }
+
+    .sponsored-badge {
+        font-size: 0.75rem; 
+    }
+}
+
+@media (max-width: 992px) { 
+    .card-title {
+        font-size: 1.125rem; 
+    }
+
+    .card-text {
+        font-size: 0.875rem; 
+    }
+
+    .sponsored-badge {
+        font-size: 0.6875rem; 
+    }
+}
+
+@media (max-width: 768px) { 
+    .card-title {
+        font-size: 1rem; 
+    }
+
+    .card-text {
+        font-size: 0.8125rem; 
+    }
+
+    .sponsored-badge {
+        font-size: 0.625rem; 
+    }
+}
+
+@media (max-width: 576px) { 
+    .card-title {
+        font-size: 0.9375rem; 
+    }
+
+    .card-text {
+        font-size: 0.75rem; 
+    }
+
+    .sponsored-badge {
+        font-size: 0.625rem; 
     }
 }
 

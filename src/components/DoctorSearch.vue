@@ -14,10 +14,13 @@ export default {
 <template>
     <div class="col-12 my-3">
         <div class="card h-100 flex-row align-items-center">
-            <div class="img-container">
+            <div class="img-container position-relative">
                 <img class="card-img img-fluid" 
                      :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" 
                      :alt="`${doctor.user_surname}-image`">
+                <span v-if="doctor.sponsors && doctor.sponsors.length > 0" class="sponsored-badge">
+                    <i class="bi bi-star-fill"></i> Sponsorizzato
+                </span>
             </div>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
@@ -71,16 +74,20 @@ export default {
     }
 
     .img-container {
-        width: 150px;
+        width: 200px;          
+        height: 200px;        
         padding: 5px;
         background-color: $navy-blue;
         border-radius: 10px;
+        position: relative;    
+        overflow: hidden;
     }
 
     .card-img {
-        width: 100%;
+        width: 100%;           
+        height: 100%;          
+        object-fit: cover;     
         border-radius: 5px;
-        object-fit: cover;
     }
 
     .card-body {
@@ -103,6 +110,27 @@ export default {
     .card-text {
         font-size: 15px;
         color: $aqua-green;
+    }
+}
+
+.sponsored-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;         
+    gap: 5px;                    
+    background-color: goldenrod;   
+    color: $pure-white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 10;
+
+    .bi-star-fill {
+        color: $pure-white;
     }
 }
 </style>
