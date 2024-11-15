@@ -12,29 +12,43 @@ const router = createRouter({
         {
             path: '/',
             name: 'homepage',
-            component: PageHome
+            component: PageHome,
+            meta: { title: 'BDoctors - Trova il dottore adatto a te!'}
         },
         {
             path: '/doctors/:slug',
             name: 'doctor',
-            component: PageSingleDoctor
+            component: PageSingleDoctor,
+            meta: { title: 'BD - Dettagli'}
         },
         {
             path: '/contact-us',
             name: 'contact',
-            component: PageContactUs
+            component: PageContactUs,
+            meta: { title: 'BD - Contattaci'}
         },
         {
             path: '/about-us',
             name: 'about',
-            component: PageAboutUs
+            component: PageAboutUs,
+            meta: { title: 'BD - Chi siamo'}
         },
         {
             path: '/advanced-research',
             name: 'advanced-research',
-            component: PageAdvanceResearch
+            component: PageAdvanceResearch,
+            meta: { title: 'BD - Ricerca avanzata'}
         }
     ]
 });
+
+// logica per aggiornare il titolo in base al meta di ogni rotta
+router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+      document.title = to.meta.title;
+    }
+    // continua navigazione
+    next();
+  });
 
 export default router;
