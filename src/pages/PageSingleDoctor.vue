@@ -28,12 +28,25 @@ export default {
             reviewName: '',
             reviewEmail: '',
             reviewContent: '',
-            reviewRating: 0, // Valore predefinito impostato a 0
-            reviewError: '' // Per gestire il messaggio di errore
-            }
+            reviewRating: 0,
+            reviewError: ''
+        }
     },
     created() {
         this.getsingleDoctor();
+        this.$router.afterEach((to) => {
+            if (to.meta.title) {
+                document.title = to.meta.title;
+            }
+        });
+    },
+    watch: {
+        // titolo scheda in base ai dati del dotttore
+        doctor(newDoctor) {
+            if (newDoctor) {
+                document.title = `BD - ${newDoctor.user_name} ${newDoctor.user_surname}`;
+            }
+        }
     },
     methods: {
         // recupera il doc con lo slug
@@ -152,9 +165,10 @@ export default {
         <div class="row">
             <div class="col-12">
                 <div class="profile-image-container mx-auto my-5">
-                    <img class="profile-image img-fluid"
-                    v-if="doctor && doctor.thumb" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
-                        
+                    <img class="profile-image img-fluid" v-if="doctor && doctor.thumb"
+                        :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`"
+                        :alt="`${doctor.user_surname}-image`">
+
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12">
@@ -174,14 +188,15 @@ export default {
                     <p class="contact mt-1">Telefono: {{ doctor.phone_number }}</p>
                     <h3 class="profile-section-title mt-1">Descrizione</h3>
                     <p class="profile-description mt-1">{{ doctor.performance }}</p>
-                    <a v-if="doctor.cv && !doctor.cv.startsWith('https://example')" :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" 
-                    target="_blank" class="btn btn-secondary fs-5 my-3">
-                    Visualizza CV
+                    <a v-if="doctor.cv && !doctor.cv.startsWith('https://example')"
+                        :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" target="_blank"
+                        class="btn btn-secondary fs-5 my-3">
+                        Visualizza CV
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12">
-               <!-- FORM INVIO MESSAGGIO -->
+                <!-- FORM INVIO MESSAGGIO -->
                 <h3 class="fs-5 fw-bold text-uppercase my-3">Lascia un Messaggio</h3>
                 <form @submit.prevent="sendMessage">
                     <div class="mb-3">
@@ -200,7 +215,8 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="send w-25" :disabled="sending">{{sending ? 'Invio in corso...' : 'Invia'}}</button>
+                        <button type="submit" class="send w-25" :disabled="sending">{{ sending ? 'Invio in corso...' :
+                            'Invia'}}</button>
                     </div>
                 </form>
             </div>
@@ -220,60 +236,66 @@ export default {
         </div>
     </div>
     <div class="bg-comments">
-            <!-- FORM INVIO REVIEWS -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12 p-3">
-                <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
-                <form @submit.prevent="sendReview">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input v-model="reviewName" type="text" class="form-control mb-3" placeholder="Il tuo nome (facoltativo)"/>
+        <!-- FORM INVIO REVIEWS -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12 p-3">
+                    <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
+                    <form @submit.prevent="sendReview">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input v-model="reviewName" type="text" class="form-control mb-3"
+                                    placeholder="Il tuo nome (facoltativo)" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <input v-model="reviewEmail" type="email" class="form-control mb-3"
+                                    placeholder="Inserisci email*" required />
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <input v-model="reviewEmail" type="email" class="form-control mb-3" placeholder="Inserisci email*" required />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <textarea v-model="reviewContent" rows="5" class="form-control my-3" placeholder="Scrivi la tua recensione*" required></textarea>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="mb-3 text-center">
-                                <label for="rating" class="form-label fw-bold">Inserisci valutazione</label>
-                                <div class="star-rating text-center">
-                                    <i v-for="vote in 5" :key="vote" :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']" @click="setRating(vote)"></i>
+                        <div class="row">
+                            <div class="col-12">
+                                <textarea v-model="reviewContent" rows="5" class="form-control my-3"
+                                    placeholder="Scrivi la tua recensione*" required></textarea>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="mb-3 text-center">
+                                    <label for="rating" class="form-label fw-bold">Inserisci valutazione</label>
+                                    <div class="star-rating text-center">
+                                        <i v-for="vote in 5" :key="vote"
+                                            :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']"
+                                            @click="setRating(vote)"></i>
+                                    </div>
+                                    <p v-if="reviewError" class="text-danger mt-2">{{ reviewError }}</p>
                                 </div>
-                                <p v-if="reviewError" class="text-danger mt-2">{{ reviewError }}</p>
+                                <!-- FINE VOTAZIONE -->
                             </div>
-                            <!-- FINE VOTAZIONE -->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="text-center">
-                                <button type="submit" class="send w-25 my-3" :disabled="sendingReview">{{ sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="text-center">
+                                    <button type="submit" class="send w-25 my-3" :disabled="sendingReview">{{
+                                        sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Sezione recensioni -->
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="text-center">
-                    Recensioni:
-                </h3>
-            </div>
-            <div class="col-12" v-if="reviews && reviews.length > 0">
-                <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
-            </div>
-            <div class="col-12" v-else>
-                <h4 class="text-danger text-center my-4">Nessuna recensione</h4>
+        <!-- Sezione recensioni -->
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center">
+                        Recensioni:
+                    </h3>
+                </div>
+                <div class="col-12" v-if="reviews && reviews.length > 0">
+                    <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
+                </div>
+                <div class="col-12" v-else>
+                    <h4 class="text-danger text-center my-4">Nessuna recensione</h4>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -354,7 +376,7 @@ export default {
     }
 }
 
-.bg-comments{
+.bg-comments {
     background-color: $warm-grey;
 }
 </style>
