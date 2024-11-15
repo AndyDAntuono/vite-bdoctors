@@ -147,7 +147,7 @@ export default {
 
 @media (max-width: 992px) and (min-width: 768px) {
   .home-container h1 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
 
@@ -164,12 +164,12 @@ export default {
   }
 
   .home-container h1 {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
 
   .home-container p {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -201,7 +201,7 @@ export default {
   }
 
   .home-container p {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
   }
 }
 </style>

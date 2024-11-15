@@ -46,7 +46,7 @@ export default {
 </script>
 
 <template>
-  <div class="col-12 col-md-6 d-flex flex-column align-items-start search-bar-box">
+  <div class="col-6 col-md-6 d-flex flex-column align-items-start search-bar-box">
     <div class="badge-carousel-wrapper">
       <!-- Carosello per specializzazioni in verticale -->
       <div class="badge-carousel" ref="carousel">
