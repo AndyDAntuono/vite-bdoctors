@@ -5,7 +5,7 @@ export default {
     },
     methods: {
         trText(text) {
-            return text.substr(0, 60)+'...';
+            return text.substr(0, 20)+'...';
         },
 
         trAdress(text) {
@@ -16,9 +16,12 @@ export default {
 </script>
 <template>
     <div class="col-12 col-md-6 col-lg-4 mt-5 mb-3">
-        <div class="card h-100 ">
-            <div class="img-container mx-auto">
+        <div class="card h-100">
+            <div class="img-container mx-auto position-relative">
                 <img class="card-img-top img-fluid" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
+                <span v-if="doctor.sponsors && doctor.sponsors.length > 0" class="sponsored-badge">
+                    <i class="bi bi-star-fill me-1"></i> Sponsorizzato
+                </span>
             </div>
             <div class="card-body">
                 <div class="card-title fw-bolder">
@@ -26,8 +29,8 @@ export default {
                     {{ doctor.user_name }} {{ doctor.user_surname }}
                 </div>
                 <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap">
-                    <li class="card-text me-2 fw-bold list d-flex align-items-center" v-for="field in doctor.fields" :key="field.name">
-                        <i class="bi bi-check-circle-fill me-2 text-white"></i> {{ field.name }}
+                    <li class="card-text me-2 fw-bold list d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2 text-white"></i> {{ doctor.fields[0].name }}
                     </li>
                 </ul>
                 <span class="fw-bold">
@@ -66,23 +69,23 @@ export default {
     }
 
     .img-container {
+        width: 150px;          
+        height: 150px;          
         padding: 5px; 
         background-color: $navy-blue; 
         border-radius: 10px; 
-        max-width: 100%; 
-        max-height: 200px; 
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        margin: auto; 
     }
 
     .card-img-top {
+        width: 100%;            
+        height: 100%;          
+        object-fit: cover;      
         border-radius: 5px;
-        width: 100%;
-        height: auto;
-        max-height: 200px; 
-        object-fit: cover; 
     }
 
     .card-body {
@@ -103,7 +106,23 @@ export default {
         font-size: 15px;
         color: $aqua-green;
     }
+
 }
 
+.sponsored-badge {
+    position: absolute;
+    bottom: 10px;
+    background-color: goldenrod;   
+    color: $pure-white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 10;
+
+    .bi-star-fill {
+        color: $pure-white;           
+    }
+}
 
 </style>
