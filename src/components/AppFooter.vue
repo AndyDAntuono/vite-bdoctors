@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <footer class="bg-dark py-3">
+  <footer class="bg-dark py-5">
     <div class="container">
       <!-- <p class="mb-0"> Questo è il footer di B-doctors</p> -->
        <div class="row">

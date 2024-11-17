@@ -161,7 +161,7 @@ export default {
 </script>
 
 <template>
-    <div class="container my-5 doctor-profile">
+    <div class="container-fluid doctor-profile">
         <div class="row">
             <div class="col-12">
                 <div class="profile-image-container mx-auto my-5">
@@ -175,19 +175,21 @@ export default {
                 <div class="profile-info" v-if="doctor">
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 class="name">{{ doctor.user_name }} {{ doctor.user_surname }}</h2>
-                        <p v-if="doctor.averageRating !== undefined && doctor.averageRating > 0" class="mb-0 me-3">
-                            Voti: <strong class="avg">{{ doctor.averageRating.toFixed(1) }}</strong>/5
+                        <p v-if="doctor.averageRating !== undefined && doctor.averageRating > 0" class="mb-0 avg-box d-flex justify-content-end align-items-center">
+                            <i class="bi bi-star-fill me-2 text-warning star-preview"></i>
+                            <strong class="avg">{{ doctor.averageRating.toFixed(1) }}</strong>
+                            <span class="text-white">/5</span>
                         </p>
                     </div>
-                    <p class="address">{{ doctor.address }}, {{ doctor.city }}</p>
+                    <p class="address fs-5">{{ doctor.address }}, {{ doctor.city }}</p>
                     <h3 class="fields-title">Specializzazioni</h3>
                     <ul class="fields list-unstyled">
                         <li v-for="field in doctor.fields" :key="field.id" class="fields-item">{{ field.name }}</li>
                     </ul>
                     <h3 class="profile-section-title mt-1">Contatti</h3>
-                    <p class="contact mt-1">Telefono: {{ doctor.phone_number }}</p>
+                    <p class="contact mt-1 fs-5">Telefono: {{ doctor.phone_number }}</p>
                     <h3 class="profile-section-title mt-1">Descrizione</h3>
-                    <p class="profile-description mt-1">{{ doctor.performance }}</p>
+                    <p class="profile-description mt-1 fs-5">{{ doctor.performance }}</p>
                     <a v-if="doctor.cv" 
                         :href="doctor.cv.includes('storage') ? 
                                 `http://127.0.0.1:8000/storage/${doctor.cv}` : 
@@ -201,8 +203,8 @@ export default {
             </div>
             <div class="col-lg-6 col-md-6 col-12">
                 <!-- FORM INVIO MESSAGGIO -->
-                <h3 class="fs-5 fw-bold text-uppercase my-3">Lascia un Messaggio</h3>
-                <form @submit.prevent="sendMessage">
+                <form @submit.prevent="sendMessage" class="border border-3 rounded p-3">
+                    <h3 class="fs-5 fw-bold text-uppercase my-3">Lascia un Messaggio</h3>
                     <div class="mb-3">
                         <input v-model="name" type="text" class="form-control" placeholder="Il tuo nome" />
                     </div>
@@ -244,9 +246,9 @@ export default {
         <!-- FORM INVIO REVIEWS -->
         <div class="container">
             <div class="row">
-                <div class="col-12 p-3">
-                    <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
-                    <form @submit.prevent="sendReview">
+                <div class="col-12 p-5">
+                    <form @submit.prevent="sendReview" class="border border-3 rounded p-3">
+                        <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <input v-model="reviewName" type="text" class="form-control mb-3"
@@ -266,7 +268,7 @@ export default {
                                 <div class="mb-3 text-center">
                                     <label for="rating" class="form-label fw-bold">Inserisci valutazione</label>
                                     <div class="star-rating text-center">
-                                        <i v-for="vote in 5" :key="vote"
+                                        <i v-for="vote in 5" :key="vote" class="bi-reviews"
                                             :class="['bi', vote <= reviewRating ? 'bi-star-fill' : 'bi-star']"
                                             @click="setRating(vote)"></i>
                                     </div>
@@ -308,6 +310,8 @@ export default {
 @import '../styles/generals.scss';
 
 .doctor-profile {
+    padding: 30px 170px;
+    background-color: $light-gray;
     .profile-image-container {
         max-width: 250px;
         margin-right: 20px;
@@ -327,8 +331,20 @@ export default {
             font-weight: bold;
         }
 
+        .avg-box {
+            background-color: $light-blue;
+            padding: 5px;
+            border-radius: 8px;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px $stars;
+        }
+
+        .star-preview {
+            text-shadow: 1px 1px 2px white;
+        }
+
         .avg {
-            color: $stars;
+            color: #fff;
         }
 
         .address,
@@ -370,7 +386,7 @@ export default {
     }
 }
 
-.bi {
+.bi-reviews {
     font-size: 18px;
     cursor: pointer;
     transition: all 0.3s;
@@ -383,5 +399,11 @@ export default {
 
 .bg-comments {
     background-color: $warm-grey;
+}
+
+@media screen and (max-width: 899px) {
+    .doctor-profile {
+        padding: 30px 50px;
+    }
 }
 </style>

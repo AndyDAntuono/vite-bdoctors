@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-    <div class="review-card my-4">
+    <div class="review-card mt-4 mb-5">
         <div class="d-flex">
             <i class="bi bi-person-fill me-2 text-primary"></i>
             <h5 class="review-name">{{ review.name }}</h5>
