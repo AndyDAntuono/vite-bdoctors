@@ -215,7 +215,7 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="send w-25" :disabled="sending">{{ sending ? 'Invio in corso...' :
+                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio in corso...' :
                             'Invia'}}</button>
                     </div>
                 </form>
@@ -224,7 +224,7 @@ export default {
     </div>
 
     <!-- TOAST DI BS -->
-    <div v-if="sentSuccess" class="toast show position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
+    <div v-if="sentSuccess" class="toast sentbtn position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto toast-title">Messaggio inviato!</strong>
             <small>{{ sentTime }}</small>
@@ -271,7 +271,7 @@ export default {
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="text-center">
-                                    <button type="submit" class="send w-25 my-3" :disabled="sendingReview">{{
+                                    <button type="submit" class="showbtn w-25 my-3" :disabled="sendingReview">{{
                                         sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
                                 </div>
                             </div>

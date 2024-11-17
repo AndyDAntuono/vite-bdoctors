@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 my-3">
+    <div class="col-12 col-lg-6 my-3">
         <div class="card h-100 flex-row align-items-center">
             <div class="img-container position-relative">
                 <img class="card-img img-fluid" 
@@ -45,7 +45,7 @@ export default {
                 </div>
                 <router-link 
                     :to="{ name: 'doctor', params: { slug: doctor.slug } }" 
-                    class="text-decoration-none show align-self-start mt-3 d-flex align-items-center justify-content-center fw-bold">
+                    class="text-decoration-none send align-self-start mt-3 d-flex align-items-center justify-content-center fw-bold">
                     Mostra il Profilo
                     <i class="bi bi-arrow-right ms-2 text-white fw-bold"></i> 
                 </router-link>
