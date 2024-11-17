@@ -31,7 +31,7 @@ header {
 //buttons
 .send,
 .back,
-.show {
+.showbtn {
     color: $pure-white;
     border: none;
     border-radius: 8px;
@@ -45,7 +45,7 @@ header {
     }
 }
 
-.send {
+.showbtn {
     letter-spacing: 1px;
     background-color: $navy-blue;
 
@@ -73,7 +73,7 @@ header {
     }
 }
 
-.show {
+.send {
     background-color: $aqua-green;
     color: $pure-white;
 

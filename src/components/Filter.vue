@@ -61,7 +61,7 @@ export default {
       </div>
     </div>
     <p class="fw-bolder mt-4">Oppure esegui una ricerca più dettagliata:</p>
-    <router-link class="text-decoration-none send" to="/advanced-research">Ricerca Avanzata</router-link>
+    <router-link class="text-decoration-none showbtn text-center" to="/advanced-research">Ricerca Avanzata</router-link>
   </div>
   <!-- Radio Button per selezionare il criterio di ordinamento -->
   <!--<div class="sort-criteria">

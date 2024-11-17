@@ -45,7 +45,7 @@ export default {
                 </div>
                 <router-link 
                     :to="{ name: 'doctor', params: { slug: doctor.slug } }" 
-                    class="text-decoration-none show align-self-start mt-3 d-flex align-items-center justify-content-center fw-bold">
+                    class="text-decoration-none showbtn align-self-start mt-3 d-flex align-items-center justify-content-center fw-bold">
                     Mostra il Profilo
                     <i class="bi bi-arrow-right ms-2 text-white fw-bold"></i> 
                 </router-link>

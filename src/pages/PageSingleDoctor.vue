@@ -224,7 +224,7 @@ export default {
     </div>
 
     <!-- TOAST DI BS -->
-    <div v-if="sentSuccess" class="toast show position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
+    <div v-if="sentSuccess" class="toast sentbtn position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto toast-title">Messaggio inviato!</strong>
             <small>{{ sentTime }}</small>
