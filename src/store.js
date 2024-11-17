@@ -10,6 +10,7 @@ export const store = reactive({
     all_doctors: [],
     fields_list: [],
     filteredDoctors: [],
+    isLoading: false,
 
     menu: [
         {
