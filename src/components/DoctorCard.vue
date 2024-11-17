@@ -45,7 +45,7 @@ export default {
                     <i class="bi bi-pencil-fill me-2 text-white"></i>
                     {{ trText(doctor.performance) }}
                 </p>
-                <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="showbtn text-decoration-none mt-2 d-flex align-items-center justify-content-center fw-bold">
+                <router-link :to="{ name: 'doctor', params: { slug: doctor.slug } }" class="send text-decoration-none mt-2 d-flex align-items-center justify-content-center fw-bold">
                     Mostra il Profilo
                     <i class="bi bi-arrow-right ms-2 text-white fw-bold"></i>
                 </router-link>

@@ -157,7 +157,7 @@ export default {
                             </div>
                             <div class="col-12 mt-4">
                                 <div class="d-flex justify-content-center">
-                                    <button type="submit" class="send px-3 par-bg-button">
+                                    <button type="submit" class="px-3 send">
                                         <strong><i class="bi bi-search"></i> Cerca</strong>
                                     </button>
                                 </div>
