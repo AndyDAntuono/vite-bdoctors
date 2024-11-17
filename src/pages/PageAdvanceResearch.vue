@@ -120,20 +120,20 @@ export default {
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <i class="bi bi-person-fill text-white me-2"></i>
                                 <label for="name" class="form-label fw-bold">Nome</label>
-                                <input v-model="user_name" type="text" class="form-control" id=""
+                                <input v-model="user_name" type="text" class="form-control" id="name"
                                     placeholder="Inserisci il nome">
                             </div>
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <i class="bi bi-person-fill text-white me-2"></i>
                                 <label for="surname" class="form-label fw-bold">Cognome</label>
-                                <input v-model="user_surname" type="text" class="form-control" id=""
+                                <input v-model="user_surname" type="text" class="form-control" id="user_surname"
                                     placeholder="Inserisci il cognome">
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <i class="bi bi-geo-alt-fill me-2 text-white"></i>
                                 <label for="city" class="form-label fw-bold">Città</label>
-                                <input v-model="city" type="text" class="form-control" id=""
+                                <input v-model="city" type="text" class="form-control" id="city"
                                     placeholder="Inserisci la città">
                             </div>
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -150,7 +150,7 @@ export default {
                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                 <i class="bi bi-star-fill me-2 text-white"></i>
                                 <label for="average-vote" class="form-label fw-bold">Media Voto</label>
-                                <select v-model="averageVote" class="form-select" id="">
+                                <select v-model="averageVote" class="form-select" id="averageVote">
                                     <option value="">Seleziona media voto</option>
                                     <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
                                 </select>

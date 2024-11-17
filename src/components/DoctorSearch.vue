@@ -14,7 +14,7 @@ export default {
 <template>
     <div class="col-12 col-lg-6 my-3">
         <div class="card h-100 flex-row align-items-center">
-            <div class="img-container position-relative">
+            <div class="img-container position-relative ms-1">
                 <img class="card-img img-fluid" 
                      :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" 
                      :alt="`${doctor.user_surname}-image`">
@@ -37,14 +37,17 @@ export default {
                             <!-- Sezione Commenti e Media Voto -->
                             <div class="d-flex align-items-center">
                                 <!-- Numero di Commenti -->
-                                <div class="d-flex align-items-center fw-bold me-2">
-                                    <i class="bi bi-chat-left-text-fill me-2 text-white"></i>
-                                    {{ doctor.reviews.length }} Commenti
+                                <div class="d-flex align-items-center fw-bold me-2 card-reviews">
+                                    <span class="me-1">
+                                        <i class="bi bi-chat-left-text-fill text-white"></i>
+                                    </span>
+                                    <span class="me-1">{{ doctor.reviews.length }}</span>
+                                    <span class="md-none">Commenti</span>
                                 </div>
                     
                                 <!-- Media Voto con Icona Stella -->
-                                <div v-if="doctor.average_rating !== undefined && !isNaN(doctor.average_rating)" class="d-flex align-items-center fw-bold">
-                                    <i class="bi bi-star-fill me-1 text-warning"></i>
+                                <div v-if="doctor.average_rating !== undefined && !isNaN(doctor.average_rating)" class="d-flex align-items-center fw-bold card-rating">
+                                    <i class="bi bi-star-fill me-1 text-warning "></i>
                                     {{ parseFloat(doctor.average_rating).toFixed(1) }}/5
                                 </div>
                             </div>
@@ -103,6 +106,8 @@ export default {
         border-radius: 10px;
         position: relative;    
         overflow: hidden;
+        border: 2px solid white;
+
     }
 
     .card-img {
@@ -121,17 +126,26 @@ export default {
     }
 
     .card-title {
-        font-size: 18px;
+        font-size: 15px;
         margin-bottom: 0.5rem;
     }
 
     .list {
         color: $aqua-green;
+        font-size: 13px;
     }
 
     .card-text {
-        font-size: 15px;
+        font-size: 13px;
         color: $aqua-green;
+    }
+
+    .card-reviews{
+        font-size: 12px;
+    }
+
+    .card-rating{
+        font-size: 12px;
     }
 }
 
@@ -153,6 +167,91 @@ export default {
 
     .bi-star-fill {
         color: $pure-white;
+    }
+}
+
+//Responsività
+@media (max-width: 992px) {
+    .card-title {
+        font-size: 15px;
+    }
+    .card-text,
+    .card-reviews {
+        font-size: 13px;
+    }
+    .card-rating {
+        font-size: 9px;
+    }
+    .img-container {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+    .card-title {
+        font-size: 14px;
+    }
+    .card-text,
+    .card-reviews {
+        font-size: 12px;
+    }
+    .card-rating {
+        font-size: 8px;
+    }
+    .img-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .md-none{
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 13px;
+    }
+    .card-text,
+    .card-reviews {
+        font-size: 11px;
+    }
+    .card-rating {
+        font-size: 7px;
+    }
+    .img-container {
+        width: 100px;
+        height: 100px;
+    }
+    .md-none{
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+    .card-title {
+        font-size: 10px;
+    }
+    .card-text {
+        font-size: 8px;
+    }
+    .card-rating {
+        font-size: 6px;
+    }
+    .card-reviews{
+        font-size: 6px;
+    }
+    .img-container {
+        width: 90px;
+        height: 90px;
+    }
+
+    .md-none{
+        display: none;
     }
 }
 </style>

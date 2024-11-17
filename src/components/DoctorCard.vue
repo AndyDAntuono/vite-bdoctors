@@ -21,7 +21,7 @@ export default {
 <template>
     <div class="col-12 col-md-6 col-lg-4 mt-5 mb-3">
         <div class="card h-100">
-            <div class="img-container mx-auto position-relative">
+            <div class="img-container mx-auto position-relative p-1 mt-1">
                 <img class="card-img-top img-fluid" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
                 <span v-if="doctor.sponsors && doctor.sponsors.length > 0" class="sponsored-badge">
                     <i class="bi bi-gem"></i> Sponsorizzato
@@ -83,6 +83,7 @@ export default {
         justify-content: center;
         overflow: hidden;
         margin: auto; 
+        border: 2px solid white;
     }
 
     .card-img-top {
