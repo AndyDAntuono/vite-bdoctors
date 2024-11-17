@@ -188,11 +188,15 @@ export default {
                     <p class="contact mt-1">Telefono: {{ doctor.phone_number }}</p>
                     <h3 class="profile-section-title mt-1">Descrizione</h3>
                     <p class="profile-description mt-1">{{ doctor.performance }}</p>
-                    <a v-if="doctor.cv && !doctor.cv.startsWith('https://example')"
-                        :href="`http://127.0.0.1:8000/storage/${doctor.cv}`" target="_blank"
+                    <a v-if="doctor.cv" 
+                        :href="doctor.cv.includes('storage') ? 
+                                `http://127.0.0.1:8000/storage/${doctor.cv}` : 
+                                `http://127.0.0.1:8000/curricula/${doctor.cv}`" 
+                        target="_blank" 
                         class="btn btn-secondary fs-5 my-3">
                         Visualizza CV
-                    </a>
+                        </a>
+
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12">
@@ -215,8 +219,9 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio in corso...' :
-                            'Invia'}}</button>
+                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio in corso...'
+                            :
+                            'Invia' }}</button>
                     </div>
                 </form>
             </div>
