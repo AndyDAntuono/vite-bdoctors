@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 my-3">
+    <div class="col-12 col-lg-6 my-3">
         <div class="card h-100 flex-row align-items-center">
             <div class="img-container position-relative">
                 <img class="card-img img-fluid" 
