@@ -24,7 +24,7 @@ export default {
             <div class="img-container mx-auto position-relative">
                 <img class="card-img-top img-fluid" :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" :alt="`${doctor.user_surname}-image`">
                 <span v-if="doctor.sponsors && doctor.sponsors.length > 0" class="sponsored-badge">
-                    <i class="bi bi-star-fill me-1"></i> Sponsorizzato
+                    <i class="bi bi-gem"></i> Sponsorizzato
                 </span>
             </div>
             <div class="card-body">

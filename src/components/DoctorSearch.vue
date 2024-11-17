@@ -5,7 +5,7 @@ export default {
     },
     methods: {
         trText(text) {
-            return text.substr(0, 100) + '...';
+            return text.substr(0, 80) + '...';
         }
     }
 }
@@ -19,15 +19,37 @@ export default {
                      :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`" 
                      :alt="`${doctor.user_surname}-image`">
                 <span v-if="doctor.sponsors && doctor.sponsors.length > 0" class="sponsored-badge">
-                    <i class="bi bi-star-fill"></i> Sponsorizzato
+                    <i class="bi bi-gem"></i> Sponsorizzato
                 </span>
             </div>
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
-                    <h5 class="card-title fw-bold">
-                        <i class="bi bi-person-fill text-white me-2"></i>
-                        {{ doctor.user_name }} {{ doctor.user_surname }}
-                    </h5>
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <!-- Nome e Cognome -->
+                            <div>
+                                <h5 class="card-title fw-bold">
+                                    <i class="bi bi-person-fill text-white me-2"></i>
+                                    {{ doctor.user_name }} {{ doctor.user_surname }}
+                                </h5>
+                            </div>
+                    
+                            <!-- Sezione Commenti e Media Voto -->
+                            <div class="d-flex align-items-center">
+                                <!-- Numero di Commenti -->
+                                <div class="d-flex align-items-center fw-bold me-2">
+                                    <i class="bi bi-chat-left-text-fill me-2 text-white"></i>
+                                    {{ doctor.reviews.length }} Commenti
+                                </div>
+                    
+                                <!-- Media Voto con Icona Stella -->
+                                <div v-if="doctor.average_rating !== undefined && !isNaN(doctor.average_rating)" class="d-flex align-items-center fw-bold">
+                                    <i class="bi bi-star-fill me-1 text-warning"></i>
+                                    {{ parseFloat(doctor.average_rating).toFixed(1) }}/5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <ul v-if="doctor.fields && doctor.fields.length > 0" class="list-unstyled d-flex flex-wrap mb-2">
                         <li class="me-2 list d-flex align-items-center fw-bold" v-for="field in doctor.fields" :key="field.id">
                             <i class="bi bi-check-circle-fill me-2 text-white"></i> 
@@ -99,7 +121,7 @@ export default {
     }
 
     .card-title {
-        font-size: 20px;
+        font-size: 18px;
         margin-bottom: 0.5rem;
     }
 
