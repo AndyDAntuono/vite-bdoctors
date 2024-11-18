@@ -34,21 +34,21 @@ export default {
          </div>
         <div class="row">
           <div class="col-12">
-            <p class="my-5">
+            <p class="footer-info my-5">
               Le informazioni proposte in questo sito non sono un consulto medico. In nessun caso, queste informazioni sostituiscono un consulto, una visita o una diagnosi formulata dal medico. Non si devono considerare le informazioni disponibili come suggerimenti per la formulazione di una diagnosi, la determinazione di un trattamento o l'assunzione o sospensione di un farmaco senza prima consultare un medico di medicina generale o uno specialista.
             </p>
           </div>
           <div class="row">
-            <div class="col-8">
-              <p>Copyright © 2024 BDoctors, tutti i diritti riservati.</p>
-            </div>
-            <div class="col-4">
-              <div class="text-end">
+            <div class="col-12 col-md-4 col-lg-4">
+              <div class="footer-icons">
                 <i class="bi bi-facebook"></i>
                 <i class="bi bi-instagram"></i>
                 <i class="bi bi-linkedin"></i>
                 <i class="bi bi-youtube"></i>
               </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-8">
+              <p class="copyright-text">Copyright © 2024 BDoctors, tutti i diritti riservati.</p>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default {
 @import '../styles/generals.scss';
 
 footer h6 {
-  color: #005792;
+  color: $light-blue;
 }
 
 footer p {
@@ -92,6 +92,10 @@ p {
   font-size: 14px;
 }
 
+.copyright-text {
+  text-align: end;
+}
+
 @media (max-width: 1200px) {
   img {
     max-width: 50%;
@@ -104,9 +108,27 @@ p {
   }
 }
 
+@media (max-width: 767px) {
+  .footer-icons, .copyright-text {
+    text-align: center;
+  }
+}
+
 @media (max-width: 425px) {
   img {
     max-width: 50%;
+  }
+
+  h6 {
+    font-size: 14px;
+  }
+
+  li {
+    font-size: 13px;
+  }
+
+  .footer-info, .copyright-text, .footer-icons {
+    font-size: 12px;
   }
 }
 
@@ -114,6 +136,17 @@ p {
   img {
     max-width: 80%;
   }
+
+  .footer-info, .copyright-text, .footer-icons {
+    font-size: 11px;
+  }
 }
+
+@media (max-width: 320px) {
+  .footer-info, .copyright-text, .footer-icons {
+    font-size: 10px;
+  }
+}
+
 
 </style>
