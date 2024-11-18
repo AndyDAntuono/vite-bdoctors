@@ -151,8 +151,8 @@ export default {
 
 @media (max-width: 768px) {
   .badge {
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
     margin-bottom: 0.4rem;
   }
   .badge-carousel {
@@ -162,7 +162,7 @@ export default {
 
 @media (max-width: 576px) {
   .badge {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
   }
   .badge-carousel {
@@ -172,8 +172,8 @@ export default {
 
 @media (max-width: 375px) {
   .badge {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
   }
   .badge-carousel {
     max-height: 130px;

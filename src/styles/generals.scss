@@ -87,3 +87,16 @@ header {
         color: $pure-white;
     }
 }
+
+@media (max-width: 375px) {
+    .showbtn {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .showbtn {
+        font-size: 11px;
+    }
+}
+  
