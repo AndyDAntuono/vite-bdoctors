@@ -15,7 +15,7 @@ export default {
            </router-link>
          </div>
          <div class="col-6 col-md-3 col-lg-3">
-           <ul class="list-unstyled"><h6>La nostra copagnia</h6>
+           <ul class="list-unstyled"><h6>La nostra compagnia</h6>
              <li><router-link to="/about-us">Chi siamo</router-link></li>
              <li><router-link to="/contact-us">Contattaci</router-link></li>
            </ul>
