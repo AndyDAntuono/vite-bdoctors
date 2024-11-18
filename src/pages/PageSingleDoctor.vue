@@ -93,10 +93,11 @@ export default {
                     this.sending = false
                     this.sentSuccess = true
                     this.sentTime = new Date().toLocaleString();
+
                     // avvenuto invio dopo 5s
                     setTimeout(() => {
                         this.sentSuccess = false
-                    }, 5000)
+                    }, 3000)
                 } else {
                     this.sending = false
                 }
@@ -231,7 +232,7 @@ export default {
     </div>
 
     <!-- TOAST DI BS -->
-    <div v-if="sentSuccess" class="toast sentbtn position-fixed" role="alert" aria-live="assertive" aria-atomic="true">
+    <div v-if="sentSuccess" class="toast position-fixed" :class="{ show: sentSuccess }" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto toast-title">Messaggio inviato!</strong>
             <small>{{ sentTime }}</small>
