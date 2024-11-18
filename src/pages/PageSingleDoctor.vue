@@ -221,7 +221,7 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio in corso...'
+                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio...'
                             :
                             'Invia' }}</button>
                     </div>
@@ -242,11 +242,11 @@ export default {
             Il messaggio è stato inviato con successo! Verrai contattato al più presto!
         </div>
     </div>
-    <div class="bg-comments">
+    <div class="bg-comments p-3">
         <!-- FORM INVIO REVIEWS -->
-        <div class="container">
+        <div class="container-fluid review-form">
             <div class="row">
-                <div class="col-12 p-5">
+                <div class="col-12">
                     <form @submit.prevent="sendReview" class="border border-3 rounded p-3">
                         <h3 class="fs-5 fw-bold text-uppercase mb-4">Lascia una Recensione</h3>
                         <div class="row">
@@ -279,7 +279,7 @@ export default {
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="text-center">
                                     <button type="submit" class="showbtn w-25 my-3" :disabled="sendingReview">{{
-                                        sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                                        sendingReview ? 'Invio...' : 'Invia' }}</button>
                                 </div>
                             </div>
                         </div>
@@ -296,7 +296,9 @@ export default {
                     </h3>
                 </div>
                 <div class="col-12" v-if="reviews && reviews.length > 0">
-                    <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
+                    <div class="review-content">
+                        <DoctorReview v-for="review in reviews" :key="review.id" :review="review" />
+                    </div>
                 </div>
                 <div class="col-12" v-else>
                     <h4 class="text-danger text-center my-4">Nessuna recensione</h4>
@@ -309,7 +311,7 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/generals.scss';
 
-.doctor-profile {
+.doctor-profile, .review-form, .review-content {
     padding: 30px 170px;
     background-color: $light-gray;
     .profile-image-container {
@@ -390,6 +392,10 @@ export default {
     }
 }
 
+.review-content {
+    padding: 30px 20px;
+}
+
 .bi-reviews {
     font-size: 18px;
     cursor: pointer;
@@ -406,8 +412,12 @@ export default {
 }
 
 @media screen and (max-width: 899px) {
-    .doctor-profile {
-        padding: 30px 50px;
+    .doctor-profile, .review-form, .review-content {
+        padding: 30px 20px;
+    }
+
+    .review-content {
+        padding: 30px 10px;
     }
 }
 </style>
