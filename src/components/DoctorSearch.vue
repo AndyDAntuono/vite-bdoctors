@@ -226,6 +226,7 @@ export default {
     .img-container {
         width: 100px;
         height: 100px;
+        display: block;
     }
     .md-none{
         display: none;
@@ -248,6 +249,7 @@ export default {
     .img-container {
         width: 90px;
         height: 90px;
+        display: none;
     }
 
     .md-none{
