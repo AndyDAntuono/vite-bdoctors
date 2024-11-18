@@ -2,10 +2,12 @@
 import { store } from '../store.js';
 import axios from 'axios';
 import DoctorSearch from '../components/DoctorSearch.vue';
+import AppRedirect from '../components/AppRedirect.vue';
 
 export default {
     components: {
-        DoctorSearch
+        DoctorSearch,
+        AppRedirect
     },
     data() {
         return {
@@ -111,7 +113,10 @@ export default {
     <div class="par-bg">
         <div class="container py-5">
             <div class="row">
-                <div class="col-12">
+                <div class="col-2">
+                    <AppRedirect />
+                </div>
+                <div class="col-8">
                     <h1 class="text-center my-4 title">Ricerca avanzata</h1>
                 </div>
                 <div class="col-12">
