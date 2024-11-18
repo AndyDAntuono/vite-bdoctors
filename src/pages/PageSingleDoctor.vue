@@ -1,11 +1,13 @@
 <script>
 import DoctorReview from '../components/DoctorReview.vue';
+import AppRedirect from '../components/AppRedirect.vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
 export default {
     components: {
         DoctorReview,
+        AppRedirect
     },
     data() {
         return {
@@ -164,7 +166,10 @@ export default {
 <template>
     <div class="container-fluid doctor-profile">
         <div class="row">
-            <div class="col-12">
+            <div class="col-2">
+                    <AppRedirect />
+            </div>
+            <div class="col-8">
                 <div class="profile-image-container mx-auto my-5">
                     <img class="profile-image img-fluid" v-if="doctor && doctor.thumb"
                         :src="doctor.thumb.startsWith('http') ? doctor.thumb : `http://127.0.0.1:8000/storage/${doctor.thumb}`"
