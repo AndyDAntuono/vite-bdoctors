@@ -221,7 +221,7 @@ export default {
                             placeholder="Scrivi il tuo messaggio..." required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio in corso...'
+                        <button type="submit" class="showbtn w-25" :disabled="sending">{{ sending ? 'Invio...'
                             :
                             'Invia' }}</button>
                     </div>
@@ -279,7 +279,7 @@ export default {
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="text-center">
                                     <button type="submit" class="showbtn w-25 my-3" :disabled="sendingReview">{{
-                                        sendingReview ? 'Invio in corso...' : 'Invia' }}</button>
+                                        sendingReview ? 'Invio...' : 'Invia' }}</button>
                                 </div>
                             </div>
                         </div>
