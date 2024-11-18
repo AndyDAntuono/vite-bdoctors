@@ -352,6 +352,10 @@ export default {
         .profile-description {
             font-size: 1rem;
             color: $dark-grey;
+            word-wrap: break-word;
+            white-space: normal;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
 
         .fields-title,
