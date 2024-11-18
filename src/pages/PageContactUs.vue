@@ -10,7 +10,8 @@ export default {
       email: '',
       subject: '',
       message: '',
-      sending: false
+      sending: false,
+      sentOk: false
     }
   },
   name: 'PageContactUs',
@@ -27,12 +28,17 @@ export default {
 
       axios.post(`${store.url}${store.contact}`, info).then((res) => {
         if (res.data.success) {
-          this.name = "",
-            this.last_name = "",
-            this.email = "",
-            this.subject = "",
-            this.message = "",
-            this.sending = false
+          this.name = '';
+            this.last_name = '';
+            this.email = '';
+            this.subject = '';
+            this.message = '';
+            this.sending = false;
+            this.sentOk = true;
+            
+            setTimeout(() => {
+                        this.sentOk = false
+                    }, 5000)
         } else {
           console.log("Errore invio messaggio")
           this.sending = false
@@ -118,7 +124,18 @@ export default {
 
     </div>
   </div>
+  <!-- TOAST -->
+  <div v-if="sentOk" class="toast position-fixed" :class="{ show: sentOk }" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+    <div class="toast-header">
+      <strong class="me-auto">Messaggio inviato!</strong>
+      <button type="button" class="btn-close" @click="sentOk = false" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Il messaggio è stato inviato con successo! Verrai contattato al più presto!
+    </div>
+  </div>
 </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -152,5 +169,21 @@ h3 {
 button:disabled {
   background-color: $mint-green;
   cursor: not-allowed;
+}
+
+.toast {
+  background-color: $navy-blue;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  .toast-header {
+      background-color: $navy-blue;
+      border-bottom: 1px solid $pure-white;
+  }
+
+  .toast-header,
+  .toast-body {
+      color: $pure-white;
+  }
 }
 </style>
