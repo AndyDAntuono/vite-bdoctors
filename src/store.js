@@ -6,6 +6,7 @@ export const store = reactive({
     fields: '/fields',
     messages: '/messages',
     reviews: '/reviews',
+    contact: '/contacts',
     selectedField: "",
     all_doctors: [],
     fields_list: [],

@@ -1,6 +1,41 @@
 <script>
+import { store } from '../store';
+import axios from 'axios';
 export default {
-  name: 'PageContactUs'
+  data() {
+    return {
+      store,
+      name: '',
+      last_name: '',
+      email: '',
+      subject: '',
+      message: ''
+    }
+  },
+  name: 'PageContactUs',
+  methods: {
+    sendMail() {
+      const info = {
+          name: this.name,
+          last_name: this.last_name,
+          email: this.email,
+          subject: this.subject,
+          message: this.message
+      }
+
+      axios.post(`${store.url}${store.contact}`, info).then((res) => {
+        if (res.data.success) {
+            this.name = "",
+            this.last_name = "",
+            this.email = "",
+            this.subject = "",
+            this.message = ""
+        } else {
+          console.log("Errore invio messaggio")
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -11,26 +46,26 @@ export default {
         <h3>Scrivici un Messaggio</h3>
         <p>Compila il modulo qui sotto e ti risponderemo il prima possibile.</p>
         <div class="bg-form rounded p-3">
-          <form method="POST">
+          <form method="POST" @submit.prevent="sendMail">
             <div>
               <label for="name">Nome:</label>
-              <input class="d-block rounded border-0" type="text" id="first_name" name="first_name" required>
+              <input v-model="name" class="d-block rounded border-0" type="text" id="first_name" name="first_name" required>
             </div>
             <div>
-              <label for="name">Cognome:</label>
-              <input class="d-block rounded border-0" type="text" id="last_name" name="last_name" required>
+              <label for="last_name">Cognome:</label>
+              <input v-model="last_name" class="d-block rounded border-0" type="text" id="last_name" name="last_name" required>
             </div>
             <div>
               <label for="email">Email:</label>
-              <input class="d-block rounded border-0" type="email" id="email" name="email" required>
+              <input v-model="email" class="d-block rounded border-0" type="email" id="email" name="email" required>
             </div>
             <div>
               <label for="subject">Oggetto:</label>
-              <input class="d-block rounded border-0" type="text" id="subject" name="subject" required>
+              <input v-model="subject" class="d-block rounded border-0" type="text" id="subject" name="subject" required>
             </div>
             <div>
               <label for="message">Messaggio:</label>
-              <textarea class="d-block rounded border-0 w-100" id="message" name="message" rows="10" required></textarea>
+              <textarea v-model="message" class="d-block rounded border-0 w-100" id="message" name="message" rows="10" required></textarea>
             </div>
             <div>
               <button class="mt-3 rounded" type="submit">Invia Messaggio</button>
